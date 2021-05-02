@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {getProduct} from "../../app/API";
+import {deleteProduct, getProducts} from "../../app/API";
 
 const initialState = {
     items: [],
@@ -9,7 +9,7 @@ const initialState = {
 export const fetchItems = createAsyncThunk(
     'products/fetchAll',
     async () => {
-        return await getProduct();
+        return await getProducts();
     }
 )
 
@@ -17,6 +17,21 @@ const itemsSlice = createSlice({
     name: "items",
     initialState,
     reducers: {
+        itemDeleted: {
+
+            reducer(state, action){
+                state.items = state.items.filter(item => item.id !== action.payload.id )
+                deleteProduct(action.payload.id);
+            },
+
+            prepare(id) {
+                return {
+                    payload: {
+                        id
+                    }
+                }
+            }
+        }
 
     },
     extraReducers: {
@@ -32,6 +47,7 @@ const itemsSlice = createSlice({
         }
     }
 });
+export const {itemDeleted} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
 
