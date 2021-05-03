@@ -1,11 +1,11 @@
 import React from 'react';
 
-function CartComp() {
+function Shop() {
     return (
         <div className="App">
-            <h5>My cart</h5>
+            <h1>Scalper shop</h1>
         </div>
     );
 }
 
-export default CartComp;
+export default Shop;
