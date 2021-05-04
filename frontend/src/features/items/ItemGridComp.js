@@ -1,65 +1,69 @@
 import React, {useEffect} from "react";
-import {fetchItems, itemDeleted, itemStatus, selectAllItems} from "./itemsSlice";
+import {addItem, fetchItems, fetchItemProgressStatus, selectAllItems} from "./itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
+import ItemCard from "./ItemCardComp";
+import {resetDatabase} from "../../app/client";
 
 
 export const ItemGrid = () => {
 
     const dispatch = useDispatch();
 
-    const status = useSelector(itemStatus);
+    const fetchStatus = useSelector(fetchItemProgressStatus);
 
     const items = useSelector(selectAllItems);
 
-    useEffect( () => {
-        if ( status === 'idle' ){
+    useEffect(() => {
+        if (fetchStatus === 'idle') {
             dispatch(fetchItems());
         }
-    })
+    },)
 
-    const onDelete = (id) => {
-        dispatch(itemDeleted(id))
+    // ### ADD ITEM PLACEHOLDER ###
+    // Hardcoded item object added dispatched to API
+    const onAddProd = () => {
+        let newItem = {
+            name: "newItem",
+            description: "very descript, much informat",
+            price: 200
+        }
+
+        dispatch(addItem(newItem));
+
     }
 
+    // ### UI DEBUGGING HELPER ###
+    const resetDb = async () => {
+        await resetDatabase();
+        dispatch(fetchItems());
+    }
+
+    // ### PLACEHOLDER ###
     let itemList;
-    if (status === 'fulfilled') {
-        itemList = items.map( item => (
-            <div key={item.id}
-                 className="
-                 m-4
-                 p-3
-                 bg-gray-500
-                 w-36
-                 h-36
-                 flex-grow-0
-                 " >
-                <h1>{item.name}</h1>
-                <p>{item.description}</p>
-                <p>{item.price}</p>
-                <button
-                    onClick={() => onDelete(item.id)}
-                >
-                    DELETE
-                </button>
-            </div>
+    if (fetchStatus === 'fulfilled') {
+        let key = 1;
+        itemList = items.map(item => (
+            <ItemCard key={key++} itemId={item.id}/>
+
         ))
     }
 
-    return (
-        <div
-        className="
-        m-auto
-        flex flex-row justify-between flex-wrap
-        p-auto pt-20
-        last:mr-auto
-        "
-        >
-            {itemList}
-            {itemList}
-            {itemList}
+    // ### PLACEHOLDER RENDER METHOD ###
+    return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
+        : (
+            <main>
+                <button onClick={onAddProd}>
+                    AddProduct
+                < /button>
+                <div
+                    className="w-11/12 flex flex-row flex-wrap place-content-start"
+                >
+                    {itemList}
+                </div>
+                <button onClick={resetDb}>RESET DB</button>
+            </main>
+        )
 
-        </div>
-    )
 }
 
 export default ItemGrid;
