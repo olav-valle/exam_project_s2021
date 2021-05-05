@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 function HeaderComp() {
     return (
-        <nav>
+        <nav className="flex justify-center items-center bg-yellow h-20 text-xl">
             <h3>Logo?</h3>
-            <ul className="nav-links">
+            <ul className="nav-links w-1/2 flex justify-around items-center list-none text-black children:hover:text-blue-light">
                 <Link to='/'>
-                    <li>Home</li>
+                    <li className="">Home</li>
                 </Link>
                 <Link to='/about'>
                 <li>About</li>
