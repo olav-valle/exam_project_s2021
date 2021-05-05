@@ -1,4 +1,7 @@
 import React from 'react';
+
+import ItemGrid from "./features/items/ItemGridComp";
+
 import HeaderComp from "./features/header/HeaderComp";
 import About from "./features/pages/About";
 import Shop from "./features/pages/Shop";
@@ -14,7 +17,7 @@ function App() {
     <div className="App">
       <HeaderComp />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={ItemGrid} />
         <Route path="/about" component={About} />
         <Route path="/shop" component={Shop} />
         <Route path="/login" component={LoginComp} />
