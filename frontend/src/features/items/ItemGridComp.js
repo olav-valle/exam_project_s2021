@@ -12,8 +12,6 @@ export const ItemGrid = () => {
     const fetchStatus = useSelector(fetchItemProgressStatus);
 
     const items = useSelector(selectAllItems);
-    
-    
 
     useEffect(() => {
         if (fetchStatus === 'idle') {
@@ -31,6 +29,7 @@ export const ItemGrid = () => {
         }
 
         dispatch(addItem(newItem));
+
     }
 
     // ### UI DEBUGGING HELPER ###
@@ -42,48 +41,28 @@ export const ItemGrid = () => {
     // ### PLACEHOLDER ###
     let itemList;
     if (fetchStatus === 'fulfilled') {
-        let key = 1;
-        console.log(items);
         itemList = items.map(item => (
-            <ItemCard 
-                key={key++}
-                itemId={item.id}
-                itemName={item.name}
-                itemDescription={item.description}
-                itemPrice={item.price}
-                itemImg={item.image}
-            />
+            <ItemCard key={item.id} itemAsProp={item}/>
+
         ))
     }
 
-    // for debuging
-    //<button onClick={onAddProd}>AddProduct</button>
-    //<button onClick={resetDb}> RESET DB</button>
-
+    // ### PLACEHOLDER RENDER METHOD ###
     return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
         : (
-            <main title="All products">
-                <h2 
-                    className="
-                    text-9xl
-                    font-bold"
-                >
-                    Store Pro-ducks
-                </h2>
+            <main>
+                <button onClick={onAddProd}>
+                    AddProduct
+                < /button>
                 <div
-                    className="
-                        itemCard
-                        flex
-                        flex-row
-                        flex-wrap
-                        max-w-x5
-                        place-content-start
-                        justify-center"
+                    className="w-11/12 flex flex-row flex-wrap place-content-start"
                 >
                     {itemList}
                 </div>
+                <button onClick={resetDb}>RESET DB</button>
             </main>
         )
+
 }
 
 export default ItemGrid;
