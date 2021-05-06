@@ -22,25 +22,25 @@ public class Setup implements CommandLineRunner {
   }
 
   @Override
-  public void run(String... args) throws Exception {
-    this.itemRepository.deleteAll();
-
-
-    this.itemRepository.save(new Item("Shoes", 500, "Shoe pair from Nike"));
-    this.itemRepository.save(new Item("Green t-shirt", 200, "Some green t-shirt"));
-    this.itemRepository.save(new Item("Blue Jeans", 230, "Random blue jeans"));
-    this.itemRepository.save(new Item("Red Jeans", 299, "From the J. Vaughan Collection"));
-    this.itemRepository.save(new Item("Orange Jeans", 249, "From the J. Vaughan Collection"));
-    this.itemRepository.save(new Item("Hat", 130, "A cool hat"));
-    this.itemRepository.save(new Item("Awesome Hat", 229, "A really cool hat!"));
-    this.itemRepository.save(new Item("Top Hat", 999, "Really just the best hat we have."));
-    this.itemRepository.save(new Item("Socks", 75, "Socks! Two of them!"));
-    this.itemRepository.save(new Item("Hoodie", 300, "Straight out tha' hood."));
-    this.itemRepository.save(new Item("Black Timberlands", 599, "Catch these!"));
-    this.itemRepository.save(new Item("Air Jordans", 800, "I believe you can fly."));
-    this.itemRepository.save(new Item("Suit", 2300, "Look sharp."));
-    this.itemRepository.save(new Item("My Sweater", 1994, "Hold this thread as I walk away." ));
-
+  public void run(String... args) {
+//    this.itemRepository.deleteAll();
+//
+//
+//    this.itemRepository.save(new Item("Shoes", 500, "Shoe pair from Nike"));
+//    this.itemRepository.save(new Item("Green t-shirt", 200, "Some green t-shirt"));
+//    this.itemRepository.save(new Item("Blue Jeans", 230, "Random blue jeans"));
+//    this.itemRepository.save(new Item("Red Jeans", 299, "From the J. Vaughan Collection"));
+//    this.itemRepository.save(new Item("Orange Jeans", 249, "From the J. Vaughan Collection"));
+//    this.itemRepository.save(new Item("Hat", 130, "A cool hat"));
+//    this.itemRepository.save(new Item("Awesome Hat", 229, "A really cool hat!"));
+//    this.itemRepository.save(new Item("Top Hat", 999, "Really just the best hat we have."));
+//    this.itemRepository.save(new Item("Socks", 75, "Socks! Two of them!"));
+//    this.itemRepository.save(new Item("Hoodie", 300, "Straight out tha' hood."));
+//    this.itemRepository.save(new Item("Black Timberlands", 599, "Catch these!"));
+//    this.itemRepository.save(new Item("Air Jordans", 800, "I believe you can fly."));
+//    this.itemRepository.save(new Item("Suit", 2300, "Look sharp."));
+//    this.itemRepository.save(new Item("My Sweater", 1994, "Hold this thread as I walk away." ));
+//
 
 
 
