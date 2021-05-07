@@ -41,9 +41,8 @@ export const ItemGrid = () => {
     // ### PLACEHOLDER ###
     let itemList;
     if (fetchStatus === 'fulfilled') {
-        let key = 1;
         itemList = items.map(item => (
-            <ItemCard key={key++} itemId={item.id}/>
+            <ItemCard key={item.id} itemAsProp={item}/>
 
         ))
     }
