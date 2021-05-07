@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {itemDelete} from "./itemsSlice";
 import {useDispatch} from "react-redux";
+import {itemAdded} from "../cart/cartSlice";
 
 // ### PLACEHOLDER COMPONENT ###
 // Has basic example implementations of state logic and Redux interaction
@@ -45,6 +46,10 @@ const ItemCard = ({itemAsProp}) => {
         dispatch(itemDelete(id))
     }
 
+    const onAdd = (item) => {
+        dispatch(itemAdded(item));
+    }
+
     return item ? (<div
         className="
                  m-4
@@ -58,9 +63,9 @@ const ItemCard = ({itemAsProp}) => {
         <p>{item.description}</p>
         <p>{item.price}</p>
         <button
-            onClick={() => onDelete(item.id)}
+            onClick={() => onAdd(item)}
         >
-            DELETE
+            ADD
         </button>
     </div>) : null
 }
