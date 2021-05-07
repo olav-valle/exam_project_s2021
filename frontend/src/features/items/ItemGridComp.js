@@ -12,25 +12,14 @@ export const ItemGrid = () => {
     const fetchStatus = useSelector(fetchItemProgressStatus);
 
     const items = useSelector(selectAllItems);
+    
+    
 
     useEffect(() => {
         if (fetchStatus === 'idle') {
             dispatch(fetchItems());
         }
     },)
-    // temp debug items:
-    const products = [
-        {
-            name:"Product1",
-            desc:"insert description here",
-            imageSrc:"imageSrc"
-        },
-        {
-            name:"Product2",
-            desc:"insert description here",
-            imageSrc:"imageSrc"
-        }
-    ];
 
     // ### ADD ITEM PLACEHOLDER ###
     // Hardcoded item object added dispatched to API
@@ -42,30 +31,6 @@ export const ItemGrid = () => {
         }
 
         dispatch(addItem(newItem));
-    return (
-        <div>
-            <div>
-                <input type="text" name="itemSearch" id="itemSearch" />
-                <div className="viewSelect">
-                    <button name="gridView">G</button>
-                    <button name="listView">L</button>
-                </div>
-            </div>
-            <h3>This is a list of items a person (or bot) can buy from our store (if it was real)</h3>
-            <section className="shopItems" name="shop items">
-                {
-                    products.map((item) => (
-                        <div>
-                            <img src={item.imageSrc} />
-                            <h4>{item.name}</h4>
-                            <p>{item.desc}</p>
-                            <button name="add to cart">+</button>
-                        </div>
-                    ))
-                }
-                <div className="add a grid"><p>I am an item, not a tea pot</p></div>
-            </section>
-
     }
 
     // ### UI DEBUGGING HELPER ###
@@ -78,28 +43,47 @@ export const ItemGrid = () => {
     let itemList;
     if (fetchStatus === 'fulfilled') {
         let key = 1;
+        console.log(items);
         itemList = items.map(item => (
-            <ItemCard key={key++} itemId={item.id}/>
-
+            <ItemCard 
+                key={key++}
+                itemId={item.id}
+                itemName={item.name}
+                itemDescription={item.description}
+                itemPrice={item.price}
+                itemImg={item.image}
+            />
         ))
     }
 
-    // ### PLACEHOLDER RENDER METHOD ###
+    // for debuging
+    //<button onClick={onAddProd}>AddProduct</button>
+    //<button onClick={resetDb}> RESET DB</button>
+
     return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
         : (
-            <main>
-                <button onClick={onAddProd}>
-                    AddProduct
-                < /button>
+            <main title="All products">
+                <h2 
+                    className="
+                    text-9xl
+                    font-bold"
+                >
+                    Store Pro-ducks
+                </h2>
                 <div
-                    className="w-11/12 flex flex-row flex-wrap place-content-start"
+                    className="
+                        itemCard
+                        flex
+                        flex-row
+                        flex-wrap
+                        max-w-x5
+                        place-content-start
+                        justify-center"
                 >
                     {itemList}
                 </div>
-                <button onClick={resetDb}>RESET DB</button>
             </main>
         )
-
 }
 
 export default ItemGrid;

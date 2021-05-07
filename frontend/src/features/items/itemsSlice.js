@@ -52,7 +52,7 @@ const itemsSlice = createSlice({
             state.addItemStatus = 'pending';
         },
         [addItem.fulfilled]: (state, action) => {
-            state.addItemStatus = 'idle';selectAllItems
+            state.addItemStatus = 'idle';
             state.fetchStatus = 'idle';
         },
         [addItem.rejected]: (state, action) => {
