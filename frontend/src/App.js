@@ -10,6 +10,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from "./features/pages/Home";
 import Footer from "./features/header/Footer";
+import CartComp from "./features/cart/CartComp";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={ItemGrid} />
         <Route path="/about" component={About} />
-        <Route path="/shop" component={Shop} />
+        <Route path="/shop" component={CartComp} />
         <Route path="/login" component={LoginComp} />
       </Switch>
       <Footer />
