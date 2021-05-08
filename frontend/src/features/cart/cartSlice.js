@@ -1,11 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {loadCart} from "./cartLocalStorage";
 
+const cartFromLocalStorage = loadCart();
+const initialState = cartFromLocalStorage
+    ?
+    cartFromLocalStorage.cart
+    : {
+        cartContent: [],
+        cartStatus: "idle",
+    }
 
-const initialState = {
-    content: [],
-    cartStatus: "idle",
-}
-
+//todo: persist cart state in browser localStorage?
 const cartSlice = createSlice({
         name: 'cart',
         initialState,
@@ -17,18 +22,18 @@ const cartSlice = createSlice({
                     // else concat {...item, qty: 1} to cart
                     let addedItem = action.payload;
                     // finds if the item is already in cart, else is undefined
-                    let itemInCart = state.content.find(({id}) => id === addedItem.id);
+                    let itemInCart = state.cartContent.find(({id}) => id === addedItem.id);
 
                     itemInCart
                         //if itemInCart is truthy, we map each item in the cart... ,
-                        ? state.content = (state.content.map(item =>
+                        ? state.cartContent = (state.cartContent.map(item =>
                             item.id === addedItem.id
                                 //to itself with qty incremented...
                                 ? {...item, qty: item.qty + 1}
                                 //or itself unchanged.
                                 : item))
                         // if itemInCart is falsy (undefined), item is not already in cart, and we add it
-                        : (state.content = state.content.concat({...action.payload, qty: 1}))
+                        : (state.cartContent = state.cartContent.concat({...action.payload, qty: 1}))
                 },
 
                 prepare(item) {
@@ -43,11 +48,11 @@ const cartSlice = createSlice({
             },
             itemQuantityChanged: {
                 reducer(state, action) {
-                    state.content = state.content.map(item =>
+                    state.cartContent = state.cartContent.map(item =>
                         // find item by id...
                         item.id === action.payload.id
                             // and set its qty value to the input.
-                            ? { ...item, qty: parseInt(action.payload.qty) }
+                            ? {...item, qty: parseInt(action.payload.qty)}
                             : item
                     )
                 },
@@ -71,10 +76,15 @@ export const {itemAdded, itemQuantityChanged} = cartSlice.actions;
 export default cartSlice.reducer;
 
 // ### EXPORT SELECTORS ###
-export const getCartContents = (state) => state.cart.content;
+export const getCartContents = (state) => state.cart.cartContent;
+
+export const selectCartItemById = (state, itemId) =>
+    state.cart.cartContent.find(item => item.id === itemId);
+
 
 // when using selector functions with parameters other than just 'state'
 // we must make sure to pass both the parameter, and 'state' when calling
 // the selector.
+// fixme: Why did this break again?! :( Fucking "state is undefined" error...
 export const getItemQtyByItemId = (state, itemId) =>
-    state.cart.content.find(item => item.id === itemId).qty;
+    (state.cart.cartContent.find(item => item.id === itemId)).qty;

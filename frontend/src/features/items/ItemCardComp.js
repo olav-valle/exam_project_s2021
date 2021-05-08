@@ -26,12 +26,16 @@ const ItemCard = ({itemAsProp}) => {
     // when using selector functions with parameters other than just 'state'
     // we must make sure to pass both the parameter, and 'state' when calling
     // the selector.
-    const qty = useSelector(state =>
-        getItemQtyByItemId(state, item.id));
+    // fixme: Why did this break again?! :( Fucking "state is undefined" error...
+    // const qty = useSelector((state) =>{
+    //     console.log(state);
+    //     return getItemQtyByItemId(state, item.id);
+    // });
 
+    const [qty, setQty] = useState("");
 
     const onQtyChange = (e) => {
-        // setQty(e.target.value);
+        setQty(e.target.value);
         dispatch(itemQuantityChanged(item.id, e.target.value));
     }
 
