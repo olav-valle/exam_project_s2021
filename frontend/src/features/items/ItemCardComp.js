@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {itemDelete} from "./itemsSlice";
-import {useDispatch} from "react-redux";
-import {itemAdded, itemQuantityChanged} from "../cart/cartSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {getItemQtyByItemId, itemAdded, itemQuantityChanged} from "../cart/cartSlice";
 import {store} from "../../app/store";
 
 // ### PLACEHOLDER COMPONENT ###
@@ -21,9 +21,17 @@ const ItemCard = ({itemAsProp}) => {
 
     // Example implementation of how to dispatch item quantity changes
     // from a number input element, and into redux cart state
-    const [qty, setQty] = useState("");
+    // const [qty, setQty] = useState("");
+
+    // when using selector functions with parameters other than just 'state'
+    // we must make sure to pass both the parameter, and 'state' when calling
+    // the selector.
+    const qty = useSelector(state =>
+        getItemQtyByItemId(state, item.id));
+
+
     const onQtyChange = (e) => {
-        setQty(e.target.value);
+        // setQty(e.target.value);
         dispatch(itemQuantityChanged(item.id, e.target.value));
     }
 
