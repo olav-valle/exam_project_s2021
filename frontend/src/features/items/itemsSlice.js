@@ -53,7 +53,7 @@ const itemsSlice = createSlice({
         },
         [addItem.fulfilled]: (state, action) => {
             state.addItemStatus = 'idle';
-            state.fetchStatus = 'idle';
+            state.items = state.items.concat(action.payload);
         },
         [addItem.rejected]: (state, action) => {
             state.addItemStatus = 'error';
