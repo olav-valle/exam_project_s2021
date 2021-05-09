@@ -20,7 +20,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={ItemGrid} />
         <Route path="/about" component={About} />
-        <Route path="/shop" component={CartComp} />
+        <Route path="/cart" component={CartComp} />
         <Route path="/login" component={LoginComp} />
       </Switch>
       <Footer />

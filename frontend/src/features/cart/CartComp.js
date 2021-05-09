@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {getCartContents, itemQuantityChanged} from "./cartSlice";
 import CartItemCard from "./CartItemCard";
+import styles from "./Cart.module.css"
 
-function CartComp() {
+function CartComp()  {
+
     const cart = useSelector(getCartContents);
     const dispatch = useDispatch();
     const onQtyChange = (e, id) => {
@@ -14,11 +16,29 @@ function CartComp() {
         <CartItemCard itemId={item.id}/>
     )) : [];
     return (
-        <div className="App ">
-            <h5>My cart</h5>
-            <div className="flex flex-col items-center  mx-auto">{cartList}</div>
+        <div className={styles.cart}>
+            <div className={styles.cart__items}>
+
+                     {cartList}
+            </div>
+
+
+
+    <div className={styles.cart__summary}>
+        <h4 className={styles.summary__title}>Cart Summary</h4>
+        <div className={styles.summary__price}>
+            <span>TOTAL: ( Items)</span>
+            <span>$ 10</span>
         </div>
+        <button className={styles.summary__checkoutBtn}>
+            Proceed To Checkout
+        </button>
+    </div>
+        </div>
+
     );
 }
 
 export default CartComp;
+
+
