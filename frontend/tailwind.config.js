@@ -27,11 +27,11 @@ module.exports = {
   },
   variants: {
     extend: {
-      textColor: ['children', 'children-hover', 'hover'],
+      backgroundColor: ['disabled'],
+      textColor: ['children', 'children-hover', 'hover', 'disabled'],
       margin: ['children'],
       maxWidth: ['children'],
       ringWidth: ['children', 'focus'],
-
     },
   },
   plugins: [

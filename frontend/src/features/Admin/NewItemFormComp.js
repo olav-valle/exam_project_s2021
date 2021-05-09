@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {addItem, selectItemById} from "../items/itemsSlice";
+import {addItem, itemUpdated, selectItemById} from "../items/itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {updateItem} from "../../app/client";
 
@@ -41,9 +41,10 @@ const NewItemFormComp = ({itemId}) => {
         if (typeof item !== "undefined") {
             // Item exists, and we need to update it
             //todo: add thunk duck for this
-            const promise = updateItem({...newItem, id: item.id, _links: item._links});
+            dispatch(itemUpdated({...newItem, id: item.id, _links: item._links}));
+            // const promise = updateItem({...newItem, id: item.id, _links: item._links});
         }
-        if (typeof item === "undefined"){
+        if (typeof item === "undefined") {
             // item does not exist, and we need to create a new one
             dispatch(addItem(newItem));
             setName("");
@@ -54,14 +55,21 @@ const NewItemFormComp = ({itemId}) => {
 
     }
 
+    const finishButtonEnabled = item ?
+        // is name, description or price in component state different from item in store?
+        ((name !== item.name) || (descr !== item.description) || (price !== item.price))
+        // If no item, are all 3 fields filed with values?
+        : (name && descr && price);
+
+
     return (
         <div aria-roledescription="form" onKeyDown={(e) => e.key !== 'Enter'}
-              className=" flex flex-row items-center h-15 bg-grey my-1 children:mx-1 ">
+             className=" flex flex-row items-center h-15 bg-grey my-1 children:mx-1 ">
             <label htmlFor="itemName">Name:</label>
             <input
                 aria-labelledby="itemName"
                 className=" border focus:ring-2"
-                type=" text"
+                type="text"
                 id="itemName"
                 name="itemName"
                 value={name}
@@ -71,9 +79,9 @@ const NewItemFormComp = ({itemId}) => {
             <label htmlFor="itemDescr">Description:</label>
             <input
                 className=" border focus:ring-2"
-                type=" text"
+                type="text"
                 id="itemDescr"
-                name=" itemDescr"
+                name="itemDescr"
                 value={descr}
                 aria-labelledby="itemDescr"
                 placeholder=" Describe the item"
@@ -81,9 +89,9 @@ const NewItemFormComp = ({itemId}) => {
             />
             <label htmlFor=" itemPrice">Price:</label>
             <input
-                aria-labelledby="itemName"
-                className=" border focus:ring-2 w-10"
-                type=" number"
+                aria-labelledby="itemPrice"
+                className="border focus:ring-2 w-16"
+                type="number"
                 min="0"
                 id="itemPrice"
                 name="itemPrice"
@@ -92,8 +100,16 @@ const NewItemFormComp = ({itemId}) => {
                 onChange={onPriceChange}
             />
             <button
+                disabled={finishButtonEnabled ? "" : "disabled"}
                 onClick={onSubmitClick}
-                className="bg-green-light focus:ring-2 hover:bg-green-dark font-bold hover:text-white focus:text-white focus:bg-green-dark rounded px-1">Finish</button>
+                className="
+                disabled:bg-grey disabled:text-black
+                bg-green-light focus:ring-2
+        hover:bg-green-dark font-bold hover:text-white
+        focus:text-white focus:bg-green-dark rounded px-1"
+            >
+                Finish
+            </button>
         </div>
     )
 
