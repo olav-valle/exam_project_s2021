@@ -1,24 +1,37 @@
 import React from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import {getCartContents, itemQuantityChanged} from "./cartSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {getCartContents} from "./cartSlice";
 import CartItemCard from "./CartItemCard";
+import CartSummaryComp from "./CartSummaryComp";
 
 function CartComp() {
+
     const cart = useSelector(getCartContents);
     const dispatch = useDispatch();
-    const onQtyChange = (e, id) => {
-        // setQty(e.target.value);
-        dispatch(itemQuantityChanged(id, e.target.value));
-    }
+
+    const totalQty = cart.reduce(((accumulator, item) =>
+        accumulator + item.qty), 0);
+
+    const totalPrice = cart.reduce((accumulator, item) =>
+        accumulator + (item.price * item.qty), 0);
+
     const cartList = cart.length > 0 ? cart.map(item => (
         <CartItemCard itemId={item.id}/>
     )) : [];
+
     return (
-        <div className="App ">
-            <h5>My cart</h5>
-            <div className="flex flex-col items-center  mx-auto">{cartList}</div>
+
+        <div className="relative flex flex-row justify-center mx-auto">
+            <div className="flex flex-col justify-center max-w-min mx-4">
+                    {cartList}
+            </div>
+            <CartSummaryComp totalPrice={totalPrice} totalQty={totalQty}/>
         </div>
+
+
     );
 }
 
 export default CartComp;
+
+
