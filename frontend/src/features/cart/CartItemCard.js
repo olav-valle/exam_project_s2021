@@ -17,29 +17,33 @@ const CartItemCard = ({itemId}) => {
     }
 
     return item ? (
-        <div className="mb-4 flex rounded-1g border-2 border-black ">
+        <div className="my-4 flex flex-row rounded shadow-xl min-w-max ">
             <img
-                className="w-50 object-contain rounded-3x1 "
-                src={item.image}
-                alt={item.title}
+                className="w-36 object-contain rounded"
+                src="https://devducks.com/static/devducks/imgs/linux-duck.jpg"
+                alt="This should really be a rubber penguin, I feel..."
             />
-            <div className="p-4 flex-col justify-between backdrop-grayscale">
+
+            <div className="flex p-4 flex-grow-1 flex-col items-start w-full justify-between backdrop-grayscale">
                 <p className="font-bold text-base">{item.name}</p>
                 <p className="text-sm">{item.description}</p>
                 <p className="text-base font-bold">$ {item.price}</p>
             </div>
-            <div className="flex-col justify-around items-center p-2.5 ">
-                <div className="flex items-center">
-                    <label>Quantity: </label>
-                    <input
+
+            <div className="flex flex-row justify-between items-end p-2 ">
+                    <label className="flex flex-row">Quantity:
+                        <input
+                        className="border w-9"
                         value={item.qty}
                         min="0"
                         type="number"
-                        onChange={onQtyChange}/>
-                </div>
+                        onChange={onQtyChange}
+                        />
+                    </label>
+
                 <button
                     onClick={onDelete}
-                    className="w-9"
+                    className="w-7"
                 >
                     <img
                         src="https://image.flaticon.com/icons/svg/709/709519.svg"
