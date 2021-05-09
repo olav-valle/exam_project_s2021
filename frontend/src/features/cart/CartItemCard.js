@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {itemQuantityChanged, itemRemovedFromCart, selectCartItemById} from "./cartSlice";
 import React, {useState} from "react";
-import styles from "./Cart.module.css"
+import styles from "./CartItem.module.css";
 
 const CartItemCard = ({itemId}) => {
     const item = useSelector(state => selectCartItemById(state, itemId))
