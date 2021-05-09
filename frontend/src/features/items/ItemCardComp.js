@@ -1,22 +1,17 @@
 import React, {useEffect, useState} from "react";
+import '../../App.css';
 import {useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
 
 // ### PLACEHOLDER COMPONENT ###
 // Has basic example implementations of state logic and Redux interaction
-const ItemCard = ({
-        itemId,
-        itemImg,
-        itemName,
-        itemDescription,
-        itemPrice
-    }) => {
+const ItemCard = ({ item }) => {
 
     const dispatch = useDispatch();
 
     const onAddToCart = (id) => {
         //add to cart. 
-        console.log("item " + id + "edded to the cart");
+        console.log("item " + id + "added to the cart");
     }
 
 
@@ -25,17 +20,30 @@ const ItemCard = ({
         className="
                  m-4
                  p-3
-                 bg-gray-700
                  w-1/5
-                 max-w-x1
-                 flex-grow-0"
-        title={itemName}
+                 bg-grey
+                 flex
+                 flex-col
+                 border-4
+                 rounded-md
+                 border-grey
+                 hover:border-yellow"
     >
-        <Link to={"/shop/product/" + itemId}>
+        <Link 
+            className="
+                itemCardLink
+                border-4 
+                border-grey
+                focus:border-yellow
+                flex
+                flex-grow
+                flex-col
+                justify-between"
+            to={"/shop/product/" + item.id}
+            aria-label={"Product: " + item.name}
+        >
             <img 
-                className="
-                max-w-1/4"
-                alt="product picture"
+                alt="picture of the product"
                 src="https://imgur.com/skXkXRr.png"
             />
             <h3
@@ -43,24 +51,36 @@ const ItemCard = ({
                     text-lg
                     font-semibold"
             >
-                {itemName}
+                {item.name}
             </h3>
-            <p>{itemDescription}</p>
+            <p 
+                title="item description"
+                className="
+                    overflow-hidden
+                    flex-grow
+                    text-lg"
+            >
+                {item.description}
+            </p>
             <p
+                title="item price"
                 className="
                     text-lg
                     font-semibold"
-                title="item price"
             >
-                {itemPrice} NOK
+                {item.price + ",- NOK"} 
             </p>    
         </Link>
         <button
             className="
                 rounded
                 border-2
-                border-gray-500"
-            onClick={() => onAddToCart(itemId)}
+                border-gray-500
+                hover:bg-yellow
+                focus:bg-yellow
+                hover:border-black
+                focus:border-black"
+            onClick={() => onAddToCart(item.id)}
             name="AddToCart"
         > 
             Add to cart
