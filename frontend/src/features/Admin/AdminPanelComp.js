@@ -10,7 +10,7 @@ const AdminPanelComp = () => {
     const items = useSelector(selectAllItems);
 
     let itemsList;
-    if (items.length > 0) {
+    if (items.length > 0 && (typeof items[0] !== "undefined")) {
         itemsList = items.map(item => <NewItemFormComp key={item.id} itemId={item.id}/> )
     }
 

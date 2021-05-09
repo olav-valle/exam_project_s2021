@@ -41,7 +41,10 @@ const getItemById = async (itemId) => {
                 method: "GET",
                 headers: header
             });
-        return await response.json();
+        if(response.ok){
+            return await response.json();
+        }
+        return await Promise.reject();
     } catch (e) {
         throw e
     }
@@ -55,7 +58,11 @@ const deleteItem = async (itemId) => {
                 method: "DELETE",
                 headers: header
             })
-        return await response;
+        // const resp = await response;
+        if(response.ok){
+            return response;
+        }
+        return await Promise.reject();
     } catch (e) {
         throw e
     }
@@ -72,7 +79,11 @@ const postNewItem = async (newItem) => {
                 headers: header
             })
         //todo: catch and handle server errors. Check status field in response body.
-        return await response.json();
+        if (response.ok) {
+            return await response.json();
+        }
+        return await Promise.reject();
+
     } catch (err) {
     }
 }
@@ -91,7 +102,10 @@ const updateItem = async (existingItem) => {
                 }),
                 headers: header
             })
-        return await response.json();
+        if (response.ok) {
+            return await response.json();
+        }
+        return await Promise.reject();
     } catch (err) {
 
     }

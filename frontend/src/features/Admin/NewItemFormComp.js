@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {addItem, itemUpdated, selectItemById} from "../items/itemsSlice";
+import {addItem, itemDelete, itemUpdated, selectItemById} from "../items/itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {updateItem} from "../../app/client";
 
@@ -80,6 +80,11 @@ const NewItemFormComp = ({itemId}) => {
 
     }
 
+    // Delete item button
+    const onDelete = () => {
+        dispatch(itemDelete(item.id));
+    }
+
 // boolean describing whether all fields in form have valid values,
 // to toggle "Finish" button disabled/enabled.
     const finishButtonEnabled = item ?
@@ -88,10 +93,29 @@ const NewItemFormComp = ({itemId}) => {
         // If no item, are all 3 fields filed with values?
         : (name && descr && price);
 
+    // todo: remove this
+    let itemIdElement = "";
+    if (item) {
+        itemIdElement = (
+            <label htmlFor="itemId">
+                ID:
+                <p>{itemId}</p>
+            </label>
+        )
+    }
+
+
 
     return (
-        <div aria-roledescription="form" onKeyDown={(e) => e.key !== 'Enter'}
-             className=" flex flex-row items-center h-15 bg-grey my-1 children:mx-1 ">
+        <div aria-roledescription="form"
+             onKeyDown={(e) => e.key !== 'Enter'}
+             className=" flex flex-row items-center h-15 bg-grey-200 my-1 children:mx-1 ">
+            {item
+                ?
+                <label htmlFor="itemId">
+                    ID:
+                    <p>{itemId}</p>
+                </label> : ""}
             <label htmlFor="itemName">Name:
                 <input
                     // aria-labelledby="itemName"
@@ -141,13 +165,32 @@ const NewItemFormComp = ({itemId}) => {
                 disabled={finishButtonEnabled ? "" : "disabled"}
                 onClick={onSubmitClick}
                 className="
-                disabled:bg-grey disabled:text-black
+                disabled:bg-grey-300 disabled:text-grey-700 disabled:border-grey-700
+                border
+                rounded
+                self-end
                 bg-green-light focus:ring-2
-        hover:bg-green-dark font-bold hover:text-white
-        focus:text-white focus:bg-green-dark rounded px-1"
+                hover:bg-green-dark font-bold hover:text-white
+                focus:text-white focus:bg-green-dark px-1"
             >
-                Finish
+                Save
             </button>
+            {item
+                ?
+                <button
+                    onClick={onDelete}
+                    className="
+                px-1
+                border rounded
+                self-end
+                bg-red-400 focus:ring-2
+                font-bold
+                hover:bg-red-600 hover:text-white
+                focus:text-white focus:bg-green-600"
+                >
+                    Delete
+                </button> : ""}
+
         </div>
     )
 
