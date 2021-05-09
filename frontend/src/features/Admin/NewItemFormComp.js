@@ -56,30 +56,33 @@ const NewItemFormComp = ({itemId}) => {
 
     return (
         <div aria-roledescription="form" onKeyDown={(e) => e.key !== 'Enter'}
-              className=" flex flex-row items-center h-15 bg-grey my-1 children:mx-1">
+              className=" flex flex-row items-center h-15 bg-grey my-1 children:mx-1 ">
             <label htmlFor="itemName">Name:</label>
             <input
-                className=" border flex-grow-0"
+                aria-labelledby="itemName"
+                className=" border focus:ring-2"
                 type=" text"
-                id=" itemName"
-                name=" itemName"
+                id="itemName"
+                name="itemName"
                 value={name}
                 placeholder=" Item name"
                 onChange={onNameChange}
             />
-            <label htmlFor=" itemDescr">Description:</label>
+            <label htmlFor="itemDescr">Description:</label>
             <input
-                className=" border flex-grow-1"
+                className=" border focus:ring-2"
                 type=" text"
-                id=" itemDescr"
+                id="itemDescr"
                 name=" itemDescr"
                 value={descr}
+                aria-labelledby="itemDescr"
                 placeholder=" Describe the item"
                 onChange={onDescrChange}
             />
             <label htmlFor=" itemPrice">Price:</label>
             <input
-                className=" border flex-grow-0 w-10"
+                aria-labelledby="itemName"
+                className=" border focus:ring-2 w-10"
                 type=" number"
                 min="0"
                 id="itemPrice"
@@ -90,7 +93,7 @@ const NewItemFormComp = ({itemId}) => {
             />
             <button
                 onClick={onSubmitClick}
-                className="bg-green-light hover:bg-green-dark text-white rounded">Finish</button>
+                className="bg-green-light focus:ring-2 hover:bg-green-dark font-bold hover:text-white focus:text-white focus:bg-green-dark rounded px-1">Finish</button>
         </div>
     )
 

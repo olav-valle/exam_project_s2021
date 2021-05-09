@@ -29,7 +29,9 @@ module.exports = {
     extend: {
       textColor: ['children', 'children-hover', 'hover'],
       margin: ['children'],
-      maxWidth: ['children']
+      maxWidth: ['children'],
+      ringWidth: ['children', 'focus'],
+
     },
   },
   plugins: [
