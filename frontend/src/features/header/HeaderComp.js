@@ -45,9 +45,9 @@ function HeaderComp() {
                         className="
                             focus:ring-4
                             focus:ring-gray"
-                        to='/shop'
+                        to='/cart'
                     >
-                        Shop
+                        Cart
                     </Link>
                 </li>
                 <li>

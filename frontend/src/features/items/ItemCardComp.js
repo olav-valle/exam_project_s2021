@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../App.css';
 import {useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
+import {itemAdded} from "../cart/cartSlice";
 
 // ### PLACEHOLDER COMPONENT ###
 // Has basic example implementations of state logic and Redux interaction
@@ -12,7 +13,10 @@ const ItemCard = ({ item }) => {
     const onAddToCart = (id) => {
         //add to cart. 
         console.log("item " + id + "added to the cart");
-
+    }
+    // Example of how to dispatch the action of adding an item to the cart.
+    const onAdd = (item) => {
+        dispatch(itemAdded(item));
     }
 
 
@@ -85,7 +89,7 @@ const ItemCard = ({ item }) => {
                 focus:bg-yellow
                 hover:border-black
                 focus:border-black"
-            onClick={() => onAddToCart(item.id)}
+            onClick={() => onAdd(item)}
             name="AddToCart"
         > 
             Add to cart
