@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {itemQuantityChanged, itemRemovedFromCart, selectCartItemById} from "./cartSlice";
 import React, {useState} from "react";
-import styles from "./CartItem.module.css";
+
 
 const CartItemCard = ({itemId}) => {
     const item = useSelector(state => selectCartItemById(state, itemId))
@@ -17,19 +17,19 @@ const CartItemCard = ({itemId}) => {
     }
 
     return item ? (
-        <div className={styles.cartItem}>
+        <div className="mb-4 flex rounded-1g border-2 border-black ">
             <img
-                className={styles.cartItem__image}
+                className="w-50 object-contain rounded-3x1 "
                 src={item.image}
                 alt={item.title}
             />
-            <div className={styles.cartItem__details}>
-                <p className={styles.details__title}>{item.name}</p>
-                <p className={styles.details__desc}>{item.description}</p>
-                <p className={styles.details__price}>$ {item.price}</p>
+            <div className="p-4 flex-col justify-between backdrop-grayscale">
+                <p className="font-bold text-base">{item.name}</p>
+                <p className="text-sm">{item.description}</p>
+                <p className="text-base font-bold">$ {item.price}</p>
             </div>
-            <div className={styles.cartItem__actions}>
-                <div className={styles.cartItem__qty}>
+            <div className="flex-col justify-around items-center p-2.5 ">
+                <div className="flex items-center">
                     <label>Quantity: </label>
                     <input
                         value={item.qty}
@@ -56,18 +56,3 @@ const CartItemCard = ({itemId}) => {
 export default CartItemCard;
 
 
-/*
-    <div className="flex flex-row items-center justify-between h-28 w-1/2 bg-grey my-1">
-        <p>{item.name}</p>
-        <p>{item.description}</p>
-        <div>
-            <label>Quantity: </label>
-            <input className="border w-10"
-                   value={item.qty}
-                   min="0"
-                   type="number"
-                   onChange={onQtyChange}/>
-        </div>
-    </div>
-
-*/

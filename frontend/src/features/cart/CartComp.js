@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {getCartContents, itemQuantityChanged} from "./cartSlice";
 import CartItemCard from "./CartItemCard";
-import styles from "./Cart.module.css"
+import styles from "./Cart.module.css";
 
 function CartComp()  {
 
@@ -20,8 +20,9 @@ function CartComp()  {
     )) : [];
 
     return (
-        <div className={styles.cart}>
-            <div className={styles.cart__items}>
+
+        <div className="m-4  grid grid-flow-row grid-cols-3">
+            <div className="bg-white shadow-xl rounded-lg overflow-hidden">
 
                      {cartList}
             </div>
@@ -39,6 +40,7 @@ function CartComp()  {
         </button>
     </div>
         </div>
+
 
     );
 }
