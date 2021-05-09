@@ -11,6 +11,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from "./features/pages/Home";
 import Footer from "./features/header/Footer";
+import CartComp from "./features/cart/CartComp";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/shop" exact component={Shop} />
         <Route path="/login" exact component={LoginComp} />
         <Route path="/shop/product/:itemId" component={itemDetails} />
+
       </Switch>
       <Footer />
     </div>

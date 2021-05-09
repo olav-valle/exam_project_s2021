@@ -12,6 +12,7 @@ const ItemCard = ({ item }) => {
     const onAddToCart = (id) => {
         //add to cart. 
         console.log("item " + id + "added to the cart");
+
     }
 
 
@@ -90,6 +91,7 @@ const ItemCard = ({ item }) => {
             Add to cart
         </button>
     </article>)
+
 }
 
 export default ItemCard;
