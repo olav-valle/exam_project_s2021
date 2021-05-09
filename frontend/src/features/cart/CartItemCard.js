@@ -7,6 +7,7 @@ const CartItemCard = ({itemId}) => {
     const item = useSelector(state => selectCartItemById(state, itemId))
 
     const dispatch = useDispatch();
+
     const onQtyChange = (e) => {
         dispatch(itemQuantityChanged(item.id, e.target.value));
     }
@@ -14,6 +15,7 @@ const CartItemCard = ({itemId}) => {
     const onDelete = () => {
         dispatch(itemRemovedFromCart(item.id))
     }
+
     return item ? (
         <div className={styles.cartItem}>
             <img
@@ -39,24 +41,19 @@ const CartItemCard = ({itemId}) => {
                     onClick={onDelete}
                     className="w-9"
                 >
-                    .<img
+                    <img
                         src="https://image.flaticon.com/icons/svg/709/709519.svg"
                         alt=""
                     />
-                    </button>
+                </button>
             </div>
         </div>
 
-) : null;
+    ) : null;
 
 }
 
 export default CartItemCard;
-
-
-
-
-
 
 
 /*

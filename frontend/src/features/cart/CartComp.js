@@ -8,13 +8,17 @@ function CartComp()  {
 
     const cart = useSelector(getCartContents);
     const dispatch = useDispatch();
-    const onQtyChange = (e, id) => {
-        // setQty(e.target.value);
-        dispatch(itemQuantityChanged(id, e.target.value));
-    }
+
+    const totalQty = cart.reduce(((accumulator, item) =>
+        accumulator + item.qty ), 0);
+
+    const totalPrice = cart.reduce((accumulator, item) =>
+    accumulator + (item.price*item.qty), 0);
+
     const cartList = cart.length > 0 ? cart.map(item => (
         <CartItemCard itemId={item.id}/>
     )) : [];
+
     return (
         <div className={styles.cart}>
             <div className={styles.cart__items}>
@@ -27,8 +31,8 @@ function CartComp()  {
     <div className={styles.cart__summary}>
         <h4 className={styles.summary__title}>Cart Summary</h4>
         <div className={styles.summary__price}>
-            <span>TOTAL: ( Items)</span>
-            <span>$ 10</span>
+            <span>TOTAL: ( {totalQty} Items)</span>
+            <span>$ {totalPrice}</span>
         </div>
         <button className={styles.summary__checkoutBtn}>
             Proceed To Checkout
