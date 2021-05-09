@@ -20,7 +20,7 @@ store.subscribe(throttle(() =>
     saveCart({
         cart: store.getState().cart
     }),
-5000));
+1000));
 
 ReactDOM.render(
   // <React.StrictMode>

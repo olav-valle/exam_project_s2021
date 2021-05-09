@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function HeaderComp() {
     return (
         <nav className="flex justify-center items-center bg-yellow h-20 text-xl">
+
             <h3>Logo?</h3>
             <ul className="
                 nav-links
@@ -59,7 +60,6 @@ function HeaderComp() {
                         Login
                     </Link>
                 </li>
-                
             </ul>
         </nav>
     );

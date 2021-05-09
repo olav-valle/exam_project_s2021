@@ -20,11 +20,10 @@ function App() {
       <HeaderComp />
       <Switch>
         <Route path="/" exact component={ItemGrid} />
-        <Route path="/about" exact component={About} />
-        <Route path="/shop" exact component={Shop} />
-        <Route path="/login" exact component={LoginComp} />
+        <Route path="/about" component={About} />
+        <Route path="/cart" component={CartComp} />
+        <Route path="/login" component={LoginComp} />
         <Route path="/shop/product/:itemId" component={itemDetails} />
-
       </Switch>
       <Footer />
     </div>
