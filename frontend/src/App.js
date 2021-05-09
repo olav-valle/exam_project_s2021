@@ -24,6 +24,7 @@ function App() {
         <Route path="/cart" component={CartComp} />
         <Route path="/login" component={LoginComp} />
         <Route path="/shop/product/:itemId" component={itemDetails} />
+
       </Switch>
       <Footer />
     </div>

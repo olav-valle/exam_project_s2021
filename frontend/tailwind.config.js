@@ -13,9 +13,6 @@ module.exports = {
         'itemCardLink': '50px minmax(900px, 1fr) 100px',
       }
     },
-    minWidth: {
-      
-    },
     colors: {
       yellow: {
         DEFAULT: '#FCA311',
