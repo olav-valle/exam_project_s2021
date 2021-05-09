@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function HeaderComp() {
     return (
@@ -11,13 +11,16 @@ function HeaderComp() {
                     <li className="">Home</li>
                 </Link>
                 <Link to='/about'>
-                <li>About</li>
+                    <li>About</li>
                 </Link>
                 <Link to='/shop'>
                     <li>Shop</li>
                 </Link>
                 <Link to='/login'>
                     <li>Login</li>
+                </Link>
+                <Link to='/admin'>
+                    <li>Admin</li>
                 </Link>
             </ul>
         </nav>

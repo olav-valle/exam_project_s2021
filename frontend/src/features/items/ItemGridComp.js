@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {addItem, fetchItems, fetchItemProgressStatus, selectAllItems} from "./itemsSlice";
+import React from "react";
+import {addItem, fetchItemProgressStatus, fetchItems, selectAllItems} from "./itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import ItemCard from "./ItemCardComp";
 import {resetDatabase} from "../../app/client";
@@ -13,11 +13,11 @@ export const ItemGrid = () => {
 
     const items = useSelector(selectAllItems);
 
-    useEffect(() => {
-        if (fetchStatus === 'idle') {
-            dispatch(fetchItems());
-        }
-    },)
+    // useEffect(() => {
+    //     if (fetchStatus === 'idle') {
+    //         dispatch(fetchItems());
+    //     }
+    // },)
 
     // ### ADD ITEM PLACEHOLDER ###
     // Hardcoded item object added dispatched to API

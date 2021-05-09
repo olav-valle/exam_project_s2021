@@ -16,13 +16,20 @@ module.exports = {
       },
       black: '#000000',
       grey: '#E5E5E5',
-      white: '#ffffff'
+      white: '#ffffff',
+      green: {
+        light: '#10b981',
+        dark: '#00593c',
+      }
+
 
     }
   },
   variants: {
     extend: {
       textColor: ['children', 'children-hover', 'hover'],
+      margin: ['children'],
+      maxWidth: ['children']
     },
   },
   plugins: [

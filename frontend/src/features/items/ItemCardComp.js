@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {itemDelete} from "./itemsSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {getItemQtyByItemId, itemAdded, itemQuantityChanged} from "../cart/cartSlice";
-import {store} from "../../app/store";
+import {useDispatch} from "react-redux";
+import {itemAdded} from "../cart/cartSlice";
 
 // ### PLACEHOLDER COMPONENT ###
 // Has basic example implementations of state logic and Redux interaction
 const ItemCard = ({itemAsProp}) => {
     const dispatch = useDispatch();
     const [item, setItem] = useState(itemAsProp);
-
-    const onDelete = (id) => {
-        dispatch(itemDelete(id))
-    }
 
     // Example of how to dispatch the action of adding an item to the cart.
     const onAdd = (item) => {
@@ -32,13 +27,6 @@ const ItemCard = ({itemAsProp}) => {
     //     return getItemQtyByItemId(state, item.id);
     // });
 
-    const [qty, setQty] = useState("");
-
-    const onQtyChange = (e) => {
-        setQty(e.target.value);
-        dispatch(itemQuantityChanged(item.id, e.target.value));
-    }
-
     return item ? (<div
         className="
                  m-4
@@ -54,10 +42,10 @@ const ItemCard = ({itemAsProp}) => {
 
         <button
             onClick={() => onAdd(item)}
+            className="border hover:bg-blue-light"
         >
-            ADD
+            ADD TO CART
         </button>
-            <input className="border w-1/2" value={qty} min="0" type="number" onChange={onQtyChange}/>
     </div>) : null
 }
 

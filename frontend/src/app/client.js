@@ -71,10 +71,31 @@ const postNewItem = async (newItem) => {
                 body: JSON.stringify(newItem),
                 headers: header
             })
+        //todo: catch and handle server errors. Check status field in response body.
         return await response.json();
     } catch (err) {
     }
 }
 
+const updateItem = async (existingItem) => {
+    try {
+        const response = await fetch(
+            existingItem._links.self.href,
+            {
+                method: "PATCH",
+                body: JSON.stringify({
+                    description: existingItem.description,
+                    id: existingItem.id,
+                    name: existingItem.name,
+                    price: existingItem.price
+                }),
+                headers: header
+            })
+        return await response.json();
+    } catch (err) {
 
-export {getItems, deleteItem, postNewItem, getItemById, resetDatabase}
+    }
+}
+
+
+export {getItems, deleteItem, postNewItem, getItemById, resetDatabase, updateItem}
