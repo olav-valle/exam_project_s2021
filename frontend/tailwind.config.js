@@ -5,6 +5,9 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    boxShadow: {
+      DEFAULT: '0 2px 8px rgba(0, 0, 0, 0.26)'
+    },
     extend: {},
     colors: {
       yellow: {

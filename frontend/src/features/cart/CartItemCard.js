@@ -17,7 +17,7 @@ const CartItemCard = ({itemId}) => {
     }
 
     return item ? (
-        <div className="my-4 flex flex-row rounded shadow-xl min-w-max ">
+        <div className="my-4 flex flex-row rounded shadow min-w-max ">
             <img
                 className="w-36 object-contain rounded"
                 src="https://devducks.com/static/devducks/imgs/linux-duck.jpg"
