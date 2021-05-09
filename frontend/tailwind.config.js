@@ -5,7 +5,11 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        'itemCardLink': '50px minmax(900px, 1fr) 100px',
+      }
+    },
     colors: {
       yellow: {
         DEFAULT: '#FCA311',
@@ -23,6 +27,7 @@ module.exports = {
   variants: {
     extend: {
       textColor: ['children', 'children-hover', 'hover'],
+      backgroundColor: ['children', 'children-hover', 'hover', 'focus'],
     },
   },
   plugins: [

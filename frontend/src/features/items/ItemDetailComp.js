@@ -45,27 +45,85 @@ const ItemDetail =() => {
         dispatch(itemDelete(id))
     }
 
-    return item ? (<main
-        className="
-                 m-4
-                 p-3
-                 bg-gray-500
-                 w-36
-                 h-36
-                 flex-grow-0
-                 ">
-        <h1>{item.name}</h1>
-        <p>{item.description}</p>
-        <p>{item.price}</p>
-        <button
-            onClick={() => onDelete(item.id)}
+    return item ? (
+    <main>  
+        <div className="
+            m-auto
+            my-16
+            p-6
+            bg-grey
+            flex
+            inline-flex	
+            flex-grow
+            flex-col
+            justify-between
+            justify-items-center
+            border-4
+            border-yellow
+            rounded-2xl"
         >
-            DELETE
-        </button>
+            <h2 className="
+                text-3xl
+                font-bold
+                mb-6
+                inline-block
+                align-middle"
+            >
+                {item.name}
+            </h2>
+            <img
+                src="https://imgur.com/skXkXRr.png"
+                alt="picture of the product"
+                className="
+                max-w-xl
+                m-auto"
+                
+            />
+            <p 
+                title="item description"
+                className="
+                    my-6
+                    overflow-hidden
+                    flex-grow"
+            >
+                {item.description}
+            </p>
+            <p
+                title="item price"
+                className="
+                    my-4
+                    text-lg
+                    font-semibold"
+            >
+                {item.price + ",- NOK"}
+                <button
+                    className="
+                        ml-4
+                        rounded
+                        border-2
+                        border-gray-500
+                        hover:bg-yellow
+                        focus:bg-yellow
+                        hover:border-black
+                        focus:border-black"
+                    name="AddToCart"
+                > 
+                    Add to cart
+                </button> 
+            </p>   
+        </div>
     </main>
     ) : (
         <main>
-            <h2>No item with id {itemId} in store</h2>
+            <h2 className="
+                text-3xl
+                font-bold
+                mt-16
+                inline-block
+                align-middle"
+            >
+                No item with id {itemId} in store
+            </h2>
         </main>
     )
 }

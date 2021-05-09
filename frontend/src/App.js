@@ -15,7 +15,7 @@ import Footer from "./features/header/Footer";
 function App() {
   return (
       <Router>
-    <div className="App">
+    <div className="App mb-16">
       <HeaderComp />
       <Switch>
         <Route path="/" exact component={ItemGrid} />
