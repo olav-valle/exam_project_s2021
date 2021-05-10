@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {addItem, fetchItems, fetchItemProgressStatus, selectAllItems} from "./itemsSlice";
+import {fetchItemProgressStatus, selectAllItems} from "./itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import ItemCard from "./ItemCardComp";
-import {resetDatabase} from "../../app/client";
 
 
 export const ItemGrid = () => {
@@ -15,14 +14,7 @@ export const ItemGrid = () => {
     //search string
     const [search, setSearch] = React.useState("");
     //list of itemCards
-    const [itemList, setItemList] = useState([]); 
-    // todo: Clear up the misplaced fetchItems dispatch
-    // todo: add keys to item comp list
-    useEffect(() => {
-        if (fetchStatus === 'idle') {
-            dispatch(fetchItems());
-        }
-    },)
+    const [itemList, setItemList] = useState([]);
 
     useEffect(() => {
         console.log("fetchStatus: " + fetchStatus);
@@ -35,42 +27,18 @@ export const ItemGrid = () => {
      * Filter displayed items by searching by item name or description
      */
     function itemSearch(){
-
         const filterdItems = items.filter((item) => 
             item.name.toLowerCase().startsWith(search.toLowerCase()) 
             || item.description.toLowerCase().includes(search.toLowerCase())
         );
-
+        console.log(items);
         let temp = filterdItems.map(item => 
-            <ItemCard item={item} />
+            <ItemCard item={item}  key={item.id}/>
         );
 
         setItemList(temp);
     }
 
-    //todo: clear up unused functions and placeholders
-
-    // ### ADD ITEM PLACEHOLDER ###
-    // Hardcoded item object added dispatched to API
-    const onAddProd = () => {
-        let newItem = {
-            name: "newItem",
-            description: "very descript, much informat",
-            price: 200
-        }
-
-        dispatch(addItem(newItem));
-    }
-
-    // ### UI DEBUGGING HELPER ###
-    const resetDb = async () => {
-        await resetDatabase();
-        dispatch(fetchItems());
-    }
-
-    // for debuging
-    //<button onClick={onAddProd}>AddProduct</button>
-    //<button onClick={resetDb}> RESET DB</button>
     return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
         : (
             <main title="All products">
