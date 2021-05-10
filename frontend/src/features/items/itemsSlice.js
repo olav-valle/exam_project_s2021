@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {deleteItem, getItems, postNewItem, updateItem} from "../../app/client";
 
 const initialState = {
-    items: [],
+    ducks: [],
     fetchStatus: 'idle',
     addItemStatus: 'idle',
     deleteItemStatus: 'idle',
@@ -38,9 +38,22 @@ export const itemUpdated = createAsyncThunk(
 )
 
 const itemsSlice = createSlice({
-    name: "items",
+    name: 'products',
     initialState,
     reducers: {
+        nothingWasDone: {
+            reducer(state, action) {
+
+            },
+            prepare( ){
+                return {
+                    payload: {
+
+                    }
+                }
+            }
+        }
+
     },
     extraReducers: {
         // ### FETCH ITEMS REDUCER
@@ -49,7 +62,7 @@ const itemsSlice = createSlice({
         },
         [fetchItems.fulfilled]: (state, action) => {
             state.fetchStatus = 'fulfilled';
-            state.items = action.payload;
+            state.ducks = action.payload;
         },
         [fetchItems.rejected]: (state, action) => {
             state.fetchStatus = 'rejected';
@@ -61,7 +74,7 @@ const itemsSlice = createSlice({
         },
         [addItem.fulfilled]: (state, action) => {
             state.addItemStatus = 'idle';
-            state.items = state.items.concat(action.payload);
+            state.ducks = state.ducks.concat(action.payload);
         },
         [addItem.rejected]: (state, action) => {
             state.addItemStatus = 'error';
@@ -75,7 +88,7 @@ const itemsSlice = createSlice({
         },
         [itemDelete.fulfilled]: (state, action) => {
             state.deleteItemStatus = 'fulfilled';
-            state.items = state.items.filter(item => item.id !== action.meta.arg)
+            state.ducks = state.ducks.filter(item => item.id !== action.meta.arg)
 
         },
         [itemDelete.rejected]: (state, action) => {
@@ -89,19 +102,24 @@ const itemsSlice = createSlice({
         [itemUpdated.fulfilled]: (state, action) => {
             state.updateItemStatus = 'fulfilled';
             // we map each item in the collection to itself, or the newly updated item if the id matches.
-            state.items = state.items.map(item => item.id === action.payload.id ? action.payload : item);
+            state.ducks = state.ducks.map(item => item.id === action.payload.id ? action.payload : item);
         }
 
     }
 });
 
-export const {} = itemsSlice.actions;
+export const {nothingWasDone} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
 
 // ### SELECTOR EXPORTS ###
-export const selectItemById = (state, itemId) => state.items.items.find(item => item.id === itemId);
-export const selectAllItems = (state) => state.items.items;
-export const fetchItemProgressStatus = (state) => state.items.fetchStatus;
-export const addItemProgressStatus = (state) => state.items.addItemStatus;
-export const deleteItemProgressStatus = (state) => state.items.deleteItemStatus;
+export const selectItemById = (state, itemId) => {
+    // const duck =
+        return state.products.ducks.find(item => item.id === itemId);
+    // return duck ? duck : null;
+}
+
+export const selectAllItems = (state) => state.products.ducks;
+export const fetchItemProgressStatus = (state) => state.products.fetchStatus;
+export const addItemProgressStatus = (state) => state.products.addItemStatus;
+export const deleteItemProgressStatus = (state) => state.products.deleteItemStatus;

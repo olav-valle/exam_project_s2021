@@ -1,3 +1,4 @@
+// const URL = '/api/items'
 const URL = 'http://localhost:8080/api/items'
 const header = {
     'Content-Type': "application/hal+json",
@@ -98,7 +99,8 @@ const updateItem = async (existingItem) => {
                     description: existingItem.description,
                     id: existingItem.id,
                     name: existingItem.name,
-                    price: existingItem.price
+                    price: existingItem.price,
+                    image: existingItem.image
                 }),
                 headers: header
             })

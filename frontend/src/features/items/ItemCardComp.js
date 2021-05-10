@@ -53,7 +53,7 @@ const ItemCard = ({ item }) => {
             <img
                 title="Item picture"
                 alt="picture of the product"
-                src={item.img ? item.img : "https://imgur.com/skXkXRr.png"}
+                src={item.image ? "/ducks/"+item.image : "https://imgur.com/skXkXRr.png"}
             />
             <h3
                 title="Item Name"
