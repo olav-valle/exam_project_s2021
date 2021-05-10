@@ -26,19 +26,19 @@ const ItemCard = ({ item }) => {
                  md:w-1/3
                  lg:w-1/4
                  xl:w-1/5
-                 bg-grey
+                 bg-grey-300
                  flex
                  flex-col
                  border-4
                  rounded-md
-                 border-grey
+                 border-grey-300
                  hover:border-yellow"
     >
         <Link 
             className="
                 itemCardLink
                 border-4 
-                border-grey
+                border-grey-300
                 focus:border-yellow
                 flex
                 flex-grow

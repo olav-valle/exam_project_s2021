@@ -79,7 +79,7 @@ export const ItemGrid = () => {
                     className="
                     p-2
                     my-4
-                    bg-grey
+                    bg-grey-300
                     "
                 >
                     <label 

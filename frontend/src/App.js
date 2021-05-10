@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 
 import ItemGrid from "./features/items/ItemGridComp";
-
 import HeaderComp from "./features/header/HeaderComp";
 import About from "./features/pages/About";
 import LoginComp from "./features/users/LoginComp";
