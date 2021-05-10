@@ -1,7 +1,19 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+import {allItemsRemovedFromCart} from "./cartSlice";
 
 const CartSummaryComp = ({totalQty, totalPrice}) => {
 
+    const dispatch = useDispatch();
+
+    const onOrderCheckout = () => {
+        // eslint-disable-next-line no-restricted-globals
+        const confirmed = confirm("Please confirm your order!")
+        if (confirmed){
+            alert("Thank you for your order!")
+        }
+        dispatch(allItemsRemovedFromCart());
+    }
 
     return (<div
             className="
@@ -21,6 +33,7 @@ const CartSummaryComp = ({totalQty, totalPrice}) => {
                 <span className="text-xl font-bold flex-0">NOK {totalPrice},-</span>
             </div>
             <button
+                onClick={onOrderCheckout}
                 className="
                 py-2 px-3 rounded border
                 bg-yellow
