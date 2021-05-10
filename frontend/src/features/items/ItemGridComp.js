@@ -28,7 +28,7 @@ export const ItemGrid = () => {
      */
     function itemSearch(){
         const filterdItems = items.filter((item) => 
-            item.name.toLowerCase().startsWith(search.toLowerCase()) 
+            item.name.toLowerCase().includes(search.toLowerCase())
             || item.description.toLowerCase().includes(search.toLowerCase())
         );
         console.log(items);
