@@ -41,7 +41,7 @@ export const ItemGrid = () => {
 
     return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
         : (
-            <main title="All products">
+            <div title="All products">
                 <div
                     title="searchBox"
                     className="
@@ -93,7 +93,7 @@ export const ItemGrid = () => {
                 >
                     {itemList}
                 </div>
-            </main>
+            </div>
         )
 }
 

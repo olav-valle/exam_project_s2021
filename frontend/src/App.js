@@ -27,8 +27,9 @@ function App() {
 
   return (
       <Router>
-    <div className="App mb-16">
+    <div className="App flex flex-col h-screen justify-between">
       <HeaderComp />
+      <main className="flex-grow">
       <Switch>
         <Route path="/" exact component={ItemGrid} />
         <Route path="/about" component={About} />
@@ -37,6 +38,7 @@ function App() {
         <Route path="/admin" component={AdminPanelComp}/>
         <Route path="/shop/product/:itemId" component={itemDetails} />
       </Switch>
+      </main>
       <Footer />
     </div>
       </Router>

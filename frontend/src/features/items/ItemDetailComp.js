@@ -46,21 +46,25 @@ const ItemDetail =() => {
     }
 
     return item ? (
-    <main>  
+    <div className="items-center justify-center m-auto">
         <div className="
-            mx-auto
+            {/*mx-auto*/}
             my-16
             p-6
             bg-grey
             flex
-            inline-flex	
-            flex-grow
+            {/*max-w-min*/}
+
+            {/*inline-flex	*/}
             flex-col
-            justify-between
-            justify-items-center
-            border-4
-            border-yellow
-            rounded-2xl"
+            items-center
+            {/*flex-grow*/}
+            {/*justify-between*/}
+            {/*items-center*/}
+            {/*border-4*/}
+            {/*border-yellow*/}
+            {/*rounded-2xl*/}
+            "
         >
             <h2 className="
                 text-3xl
@@ -96,8 +100,9 @@ const ItemDetail =() => {
                     font-semibold"
             >
                 {item.price + ",- NOK"}
-                <button
-                    className="
+            </p>
+            <button
+                className="
                         ml-4
                         rounded
                         border-2
@@ -106,13 +111,12 @@ const ItemDetail =() => {
                         focus:bg-yellow
                         hover:border-black
                         focus:border-black"
-                    name="AddToCart"
-                > 
-                    Add to cart
-                </button> 
-            </p>   
+                name="AddToCart"
+            >
+                Add to cart
+            </button>
         </div>
-    </main>
+    </div>
     ) : (
         <main>
             <h2 className="

@@ -32,7 +32,7 @@ function HeaderComp() {
     return (
         <nav className="flex justify-center items-center bg-yellow h-20 text-xl">
 
-            <img className="h-16" alt="A logo of a rubber duck silhouette" src="3135085.png"/>
+            <img className="h-16" alt="A logo of a rubber duck silhouette" src="/3135085.png"/>
             <ul className="
                 nav-links
                 w-1/2
