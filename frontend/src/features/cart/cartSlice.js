@@ -78,29 +78,32 @@ const cartSlice = createSlice({
                         }
                     }
                 }
+            },
+            allItemsRemovedFromCart: {
+                reducer(state, action){
+                    state.cartContent = [];
+                },
+                prepare(){
+                    return{
+                        payload: {
+
+                        }
+                    }
+                }
             }
         }
 
     }
 );
 
-export const {itemAdded, itemQuantityChanged, itemRemovedFromCart} = cartSlice.actions;
+export const {itemAdded, itemQuantityChanged, itemRemovedFromCart, allItemsRemovedFromCart} = cartSlice.actions;
 
 export default cartSlice.reducer;
 
 // ### EXPORT SELECTORS ###
 export const getCartContents = (state) => state.cart.cartContent;
 
-
-
-
 export const selectCartItemById = (state, itemId) =>
     state.cart.cartContent.find(item => item.id === itemId);
 
 
-// when using selector functions with parameters other than just 'state'
-// we must make sure to pass both the parameter, and 'state' when calling
-// the selector.
-// fixme: Why did this break again?! :( Fucking "state is undefined" error...
-export const getItemQtyByItemId = (state, itemId) =>
-    (state.cart.cartContent.find(item => item.id === itemId)).qty;

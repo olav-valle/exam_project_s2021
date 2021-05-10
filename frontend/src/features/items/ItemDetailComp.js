@@ -3,6 +3,7 @@ import {getItemById} from "../../app/client";
 import {itemDelete, selectItemById} from "./itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
+import {itemAdded} from "../cart/cartSlice";
 
 const ItemDetail =() => {
     const {itemId} = useParams();
@@ -41,8 +42,8 @@ const ItemDetail =() => {
     //     // whatever is inside the first parens
     // }, [itemId])
 
-    const onDelete = (id) => {
-        dispatch(itemDelete(id))
+    const onAdd = () => {
+        dispatch(itemAdded(item));
     }
 
     return item ? (
@@ -112,13 +113,14 @@ const ItemDetail =() => {
                         hover:border-black
                         focus:border-black"
                 name="AddToCart"
+                onClick={onAdd}
             >
                 Add to cart
             </button>
         </div>
     </div>
     ) : (
-        <main>
+        <div>
             <h2 className="
                 text-3xl
                 font-bold
@@ -128,7 +130,7 @@ const ItemDetail =() => {
             >
                 No item with id {itemId} in store
             </h2>
-        </main>
+        </div>
     )
 }
 

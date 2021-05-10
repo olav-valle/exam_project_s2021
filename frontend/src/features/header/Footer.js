@@ -7,7 +7,7 @@ const Footer = () => (
     {/*absolute bottom-0*/}
     mt-8 text-center">
 
-        <p >All rights reserved. Createe by Merge Conflict, 2021.</p> <p>Ducks are borrowed from https://devducks.com/ and are Copyright © 2020 Hexical Labs LLC </p>
+        <p >All rights reserved. Created by Merge Conflict, 2021.</p> <p>Ducks are borrowed from https://devducks.com/ and are Copyright © 2020 Hexical Labs LLC </p>
 
     </div>
 );

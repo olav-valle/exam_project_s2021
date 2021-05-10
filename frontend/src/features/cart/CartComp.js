@@ -26,6 +26,7 @@ function CartComp() {
                 {cartList}
             </div>
             <CartSummaryComp totalPrice={totalPrice} totalQty={totalQty}/>
+
         </div>
 
 
