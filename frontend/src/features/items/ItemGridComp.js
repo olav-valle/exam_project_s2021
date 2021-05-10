@@ -12,7 +12,6 @@ export const ItemGrid = () => {
     const fetchStatus = useSelector(fetchItemProgressStatus);
     //item list from API
     const items = useSelector(selectAllItems);
-
     //search string
     const [search, setSearch] = React.useState("");
     //list of itemCards

@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from "react";
 import '../../App.css';
 import {useDispatch} from "react-redux";
@@ -9,16 +10,11 @@ import {itemAdded} from "../cart/cartSlice";
 const ItemCard = ({ item }) => {
 
     const dispatch = useDispatch();
-
-    const onAddToCart = (id) => {
-        //add to cart. 
-        console.log("item " + id + "added to the cart");
-    }
+  
     // Example of how to dispatch the action of adding an item to the cart.
     const onAdd = (item) => {
         dispatch(itemAdded(item));
     }
-
 
     return (
     <article 
@@ -95,7 +91,6 @@ const ItemCard = ({ item }) => {
             Add to cart
         </button>
     </article>)
-
 }
 
 export default ItemCard;
