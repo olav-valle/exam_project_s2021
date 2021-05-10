@@ -111,13 +111,14 @@ function HeaderComp() {
 
             {isSmallScreen ?
                 <div
-                    // onBlur={toggleMenuOnClick}
-                    className="
-                    relative
-                    ">
+                    className="relative"
+                >
                     <button
+                        aria-label="Drop down navigation menu"
+                        aria-roledescription="button"
+                        aria-haspopup="menu"
+                        aria-expanded={menuState}
                         onClick={toggleMenuOnClick}
-                        // onBlur={toggleMenuOnClick}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -127,6 +128,7 @@ function HeaderComp() {
                     </button>
                     {menuState ?
                         <ul
+                            aria-roledescription="menu"
                             onClick={toggleMenuOnClick}
                             className="
                             p-4
@@ -173,9 +175,14 @@ function HeaderComp() {
                                 >
                                     Admin
                                 </Link>
+
                             </li>
-                        </ul> : null}
-                </div> : null}
+                        </ul>
+                        : null
+                    }
+                </div>
+                : null
+            }
         </nav>
     );
 }
