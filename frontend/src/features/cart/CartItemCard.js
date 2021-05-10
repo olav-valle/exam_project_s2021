@@ -27,29 +27,30 @@ const CartItemCard = ({itemId}) => {
             <div className="flex p-4 flex-grow-1 flex-col items-start w-full justify-between backdrop-grayscale">
                 <p className="font-bold text-base">{item.name}</p>
                 <p className="text-sm">{item.description}</p>
-                <p className="text-base font-bold">$ {item.price}</p>
+                <p className="text-base font-bold">{item.price},-</p>
             </div>
 
-            <div className="flex flex-row justify-between items-end p-2 ">
-                    <label className="flex flex-row">Quantity:
-                        <input
+            <div className="flex flex-col justify-around items-end p-2 ">
+                <label className="flex flex">Quantity:
+                    <input
+                        aria-label="Item Quantity"
                         className="border w-9"
                         value={item.qty}
                         min="0"
                         type="number"
                         onChange={onQtyChange}
-                        />
-                    </label>
+                    />
+                </label>
 
                 <button
+                    name="remove item"
+                    aria-label="Remove Item From Cart."
                     onClick={onDelete}
-                    className="w-7"
+                    className="hover:text-red-500"
                 >
-                    {/*todo: add ARIA to this button*/}
-                    <img
-                        src="https://image.flaticon.com/icons/svg/709/709519.svg"
-                        alt=""
-                    />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
                 </button>
             </div>
         </div>

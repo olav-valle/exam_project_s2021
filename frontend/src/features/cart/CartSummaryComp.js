@@ -1,4 +1,3 @@
-import styles from "./Cart.module.css";
 import React from "react";
 
 const CartSummaryComp = ({totalQty, totalPrice}) => {
@@ -12,12 +11,19 @@ const CartSummaryComp = ({totalQty, totalPrice}) => {
             h-36
             my-4
             ">
-            <h4 className={styles.summary__title}>Cart Summary</h4>
-            <div className={styles.summary__price}>
-                <span>TOTAL: ( {totalQty} Items)</span>
-                <span>$ {totalPrice}</span>
+            <h4 className="text-xl font-bold">Cart Summary:</h4>
+            <div className="flex items-center">
+                <span className="text-sm flex-1">TOTAL: ({totalQty} Items)</span>
+                <span className="text-xl font-bold flex-0">NOK {totalPrice},-</span>
             </div>
-            <button className={styles.summary__checkoutBtn}>
+            <button
+                className="
+                py-2 px-3 rounded border
+                bg-yellow
+                text-xl font-bold
+                cursor-pointer
+                hover:opacity-75
+                focus:outline-none focus:ring-2">
                 Proceed To Checkout
             </button>
         </div>
