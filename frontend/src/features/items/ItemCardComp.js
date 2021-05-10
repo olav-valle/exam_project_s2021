@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from "react";
 import '../../App.css';
 import {useDispatch} from "react-redux";
@@ -9,16 +10,11 @@ import {itemAdded} from "../cart/cartSlice";
 const ItemCard = ({ item }) => {
 
     const dispatch = useDispatch();
-
-    const onAddToCart = (id) => {
-        //add to cart. 
-        console.log("item " + id + "added to the cart");
-    }
+  
     // Example of how to dispatch the action of adding an item to the cart.
     const onAdd = (item) => {
         dispatch(itemAdded(item));
     }
-
 
     return (
     <article 
@@ -30,19 +26,19 @@ const ItemCard = ({ item }) => {
                  md:w-1/3
                  lg:w-1/4
                  xl:w-1/5
-                 bg-grey
+                 bg-grey-300
                  flex
                  flex-col
                  border-4
                  rounded-md
-                 border-grey
+                 border-grey-300
                  hover:border-yellow"
     >
         <Link 
             className="
                 itemCardLink
                 border-4 
-                border-grey
+                border-grey-300
                 focus:border-yellow
                 flex
                 flex-grow
@@ -95,7 +91,6 @@ const ItemCard = ({ item }) => {
             Add to cart
         </button>
     </article>)
-
 }
 
 export default ItemCard;

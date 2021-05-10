@@ -45,6 +45,7 @@ const CartItemCard = ({itemId}) => {
                     onClick={onDelete}
                     className="w-7"
                 >
+                    {/*todo: add ARIA to this button*/}
                     <img
                         src="https://image.flaticon.com/icons/svg/709/709519.svg"
                         alt=""

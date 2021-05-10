@@ -1,6 +1,9 @@
 
 // uses the tailwindcss-children plugin for child selector variants:
 // https://github.com/benface/tailwindcss-children
+
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
@@ -22,16 +25,23 @@ module.exports = {
         light: '#3C64B9'
       },
       black: '#000000',
-      grey: '#E5E5E5',
-      white: '#ffffff'
+      grey: colors.gray,
+      white: '#ffffff',
+      green: {
+        light: '#10b981',
+        dark: '#00593c',
+      },
+      red: colors.red,
     }
   },
   variants: {
     extend: {
-      textColor: ['children', 'children-hover', 'hover'],
-      backgroundColor: ['children', 'children-hover', 'hover', 'focus'],
+      textColor: ['children', 'children-hover', 'hover', 'disabled'],
+      margin: ['children'],
+      maxWidth: ['children'],
+      backgroundColor: ['children', 'children-hover', 'hover', 'focus', 'disabled'],
       borderColor: ['children', 'children-hover','hover', 'focus'],
-      borderWidth: ['children', 'children-hover','hover', 'focus'],
+      borderWidth: ['children', 'children-hover','hover', 'focus', 'disabled'],
       ringWidth: ['children', 'children-hover','hover', 'focus'],
       ringColor: ['children', 'children-hover','hover', 'focus'],
     },

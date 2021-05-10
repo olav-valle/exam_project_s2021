@@ -12,12 +12,12 @@ export const ItemGrid = () => {
     const fetchStatus = useSelector(fetchItemProgressStatus);
     //item list from API
     const items = useSelector(selectAllItems);
-
     //search string
     const [search, setSearch] = React.useState("");
     //list of itemCards
     const [itemList, setItemList] = useState([]); 
-
+    // todo: Clear up the misplaced fetchItems dispatch
+    // todo: add keys to item comp list
     useEffect(() => {
         if (fetchStatus === 'idle') {
             dispatch(fetchItems());
@@ -47,6 +47,8 @@ export const ItemGrid = () => {
 
         setItemList(temp);
     }
+
+    //todo: clear up unused functions and placeholders
 
     // ### ADD ITEM PLACEHOLDER ###
     // Hardcoded item object added dispatched to API
@@ -80,7 +82,7 @@ export const ItemGrid = () => {
                     className="
                     p-2
                     my-4
-                    bg-grey
+                    bg-grey-300
                     "
                 >
                     <label 

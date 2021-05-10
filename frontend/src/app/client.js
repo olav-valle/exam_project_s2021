@@ -41,7 +41,10 @@ const getItemById = async (itemId) => {
                 method: "GET",
                 headers: header
             });
-        return await response.json();
+        if(response.ok){
+            return await response.json();
+        }
+        return await Promise.reject();
     } catch (e) {
         throw e
     }
@@ -55,7 +58,11 @@ const deleteItem = async (itemId) => {
                 method: "DELETE",
                 headers: header
             })
-        return await response;
+        // const resp = await response;
+        if(response.ok){
+            return response;
+        }
+        return await Promise.reject();
     } catch (e) {
         throw e
     }
@@ -71,10 +78,38 @@ const postNewItem = async (newItem) => {
                 body: JSON.stringify(newItem),
                 headers: header
             })
-        return await response.json();
+        //todo: catch and handle server errors. Check status field in response body.
+        if (response.ok) {
+            return await response.json();
+        }
+        return await Promise.reject();
+
     } catch (err) {
     }
 }
 
+const updateItem = async (existingItem) => {
+    try {
+        const response = await fetch(
+            existingItem._links.self.href,
+            {
+                method: "PATCH",
+                body: JSON.stringify({
+                    description: existingItem.description,
+                    id: existingItem.id,
+                    name: existingItem.name,
+                    price: existingItem.price
+                }),
+                headers: header
+            })
+        if (response.ok) {
+            return await response.json();
+        }
+        return await Promise.reject();
+    } catch (err) {
 
-export {getItems, deleteItem, postNewItem, getItemById, resetDatabase}
+    }
+}
+
+
+export {getItems, deleteItem, postNewItem, getItemById, resetDatabase, updateItem}

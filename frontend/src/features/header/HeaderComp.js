@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function HeaderComp() {
     return (
@@ -24,7 +24,7 @@ function HeaderComp() {
                     <Link 
                         className="
                             focus:ring-4
-                            focus:ring-gray"
+                            focus:ring-gray-300"
                         to='/'
                     >
                         Home
@@ -34,7 +34,7 @@ function HeaderComp() {
                     <Link 
                         className="
                             focus:ring-4
-                            focus:ring-gray"
+                            focus:ring-gray-300"
                         to='/about'
                     >
                         About
@@ -44,7 +44,7 @@ function HeaderComp() {
                     <Link 
                         className="
                             focus:ring-4
-                            focus:ring-gray"
+                            focus:ring-gray-300"
                         to='/cart'
                     >
                         Cart
@@ -54,10 +54,20 @@ function HeaderComp() {
                     <Link 
                         className="
                             focus:ring-4
-                            focus:ring-gray"
+                            focus:ring-gray-300"
                         to='/login'
                     >
                         Login
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        className="
+                            focus:ring-4
+                            focus:ring-gray-300"
+                        to='/admin'
+                    >
+                        Admin
                     </Link>
                 </li>
             </ul>
