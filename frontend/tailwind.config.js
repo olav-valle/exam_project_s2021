@@ -8,7 +8,14 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    boxShadow: {
+      DEFAULT: '0 2px 8px rgba(0, 0, 0, 0.26)'
+    },
+    extend: {
+      gridTemplateRows: {
+        'itemCardLink': '50px minmax(900px, 1fr) 100px',
+      }
+    },
     colors: {
       yellow: {
         DEFAULT: '#FCA311',
@@ -25,19 +32,18 @@ module.exports = {
         dark: '#00593c',
       },
       red: colors.red,
-
-
-
     }
   },
   variants: {
     extend: {
-      backgroundColor: ['disabled'],
       textColor: ['children', 'children-hover', 'hover', 'disabled'],
       margin: ['children'],
       maxWidth: ['children'],
-      ringWidth: ['children', 'focus'],
-      borderWidth: ['disabled']
+      backgroundColor: ['children', 'children-hover', 'hover', 'focus', 'disabled'],
+      borderColor: ['children', 'children-hover','hover', 'focus'],
+      borderWidth: ['children', 'children-hover','hover', 'focus', 'disabled'],
+      ringWidth: ['children', 'children-hover','hover', 'focus'],
+      ringColor: ['children', 'children-hover','hover', 'focus'],
     },
   },
   plugins: [

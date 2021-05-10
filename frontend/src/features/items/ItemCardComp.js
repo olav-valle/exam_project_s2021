@@ -1,52 +1,96 @@
-import React, {useState} from "react";
-import {itemDelete} from "./itemsSlice";
+
+import React, {useEffect, useState} from "react";
+import '../../App.css';
 import {useDispatch} from "react-redux";
+import { Link } from "react-router-dom";
 import {itemAdded} from "../cart/cartSlice";
 
 // ### PLACEHOLDER COMPONENT ###
 // Has basic example implementations of state logic and Redux interaction
-const ItemCard = ({itemAsProp}) => {
-    const dispatch = useDispatch();
-    const [item, setItem] = useState(itemAsProp);
+const ItemCard = ({ item }) => {
 
+    const dispatch = useDispatch();
+  
     // Example of how to dispatch the action of adding an item to the cart.
     const onAdd = (item) => {
         dispatch(itemAdded(item));
     }
 
-    // Example implementation of how to dispatch item quantity changes
-    // from a number input element, and into redux cart state
-    // const [qty, setQty] = useState("");
-
-    // when using selector functions with parameters other than just 'state'
-    // we must make sure to pass both the parameter, and 'state' when calling
-    // the selector.
-    // fixme: Why did this break again?! :( Fucking "state is undefined" error...
-    // const qty = useSelector((state) =>{
-    //     console.log(state);
-    //     return getItemQtyByItemId(state, item.id);
-    // });
-
-    return item ? (<div
+    return (
+    <article 
         className="
                  m-4
                  p-3
-                 bg-gray-500
-                 w-36
-                 h-36
-                 flex-grow-0
-                 ">
-        <h1>{item.name}</h1>
-        <p>{item.description}</p>
-        <p>{item.price}</p>
-
-        <button
-            onClick={() => onAdd(item)}
-            className="border hover:bg-blue-light"
+                 w-full
+                 sm:w-3/5
+                 md:w-1/3
+                 lg:w-1/4
+                 xl:w-1/5
+                 bg-grey
+                 flex
+                 flex-col
+                 border-4
+                 rounded-md
+                 border-grey
+                 hover:border-yellow"
+    >
+        <Link 
+            className="
+                itemCardLink
+                border-4 
+                border-grey
+                focus:border-yellow
+                flex
+                flex-grow
+                flex-col
+                justify-between"
+            to={"/shop/product/" + item.id}
+            aria-label={"Product: " + item.name}
         >
-            ADD TO CART
+            <img 
+                alt="picture of the product"
+                src="https://imgur.com/skXkXRr.png"
+            />
+            <h3
+                className="
+                    text-lg
+                    font-semibold"
+            >
+                {item.name}
+            </h3>
+            <p 
+                title="item description"
+                className="
+                    overflow-hidden
+                    flex-grow
+                    text-lg"
+            >
+                {item.description}
+            </p>
+            <p
+                title="item price"
+                className="
+                    text-lg
+                    font-semibold"
+            >
+                {item.price + ",- NOK"} 
+            </p>    
+        </Link>
+        <button
+            className="
+                rounded
+                border-2
+                border-gray-500
+                hover:bg-yellow
+                focus:bg-yellow
+                hover:border-black
+                focus:border-black"
+            onClick={() => onAdd(item)}
+            name="AddToCart"
+        > 
+            Add to cart
         </button>
-    </div>) : null
+    </article>)
 }
 
 export default ItemCard;
