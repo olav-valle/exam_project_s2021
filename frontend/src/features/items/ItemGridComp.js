@@ -21,7 +21,7 @@ export const ItemGrid = () => {
         if (fetchStatus === 'fulfilled') {
             itemSearch();
         }
-    }, [fetchStatus,search]);
+    }, [fetchStatus, search]);
 
     /**
      * Filter displayed items by searching by item name or description
@@ -42,39 +42,45 @@ export const ItemGrid = () => {
     return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
         : (
             <main title="All products">
-                <h2 className="text-7xl font-bold">
-                    Store Pro-ducks
-                </h2>
                 <div
                     title="searchBox"
                     className="
+                    flex
+                    flex-row
+                    justify-end
                     p-2
-                    my-4
+                    mb-4
                     bg-grey-300
                     "
                 >
-                    <label 
+                    <label
                         for="itemSearchBox"
                         className="
                             text-lg
                             font-semibold
                             mr-3"
                     >
-                        Products search: 
+                        Duck search:
                     </label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         onChange={(e) => setSearch(e.target.value)}
                         value={search}
                         id="itemSearchBox"
-                        placeholder="Search for products"
+                        placeholder="Find a duck"
                         className="
                             pl-2
                             py-1
                             rounded-md
-                            w-1/3"
+                            w-1/6
+                            transition-width ease-in-out duration-700
+                            focus:w-1/3
+                            "
                     />
                 </div>
+                <h2 className="text-7xl font-bold text-center">
+                    Our Pro-ducks
+                </h2>
                 <div
                     className="
                         itemCard

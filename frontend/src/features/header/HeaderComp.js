@@ -6,7 +6,7 @@ function HeaderComp() {
     return (
         <nav className="flex justify-center items-center bg-yellow h-20 text-xl">
 
-            <h3>Logo?</h3>
+            <img className="h-16" alt="A logo of a rubber duck silhouette" src="3135085.png"/>
             <ul className="
                 nav-links
                 w-1/2
@@ -21,7 +21,8 @@ function HeaderComp() {
                 children:hover:border-blue-light"
             >
                 <li>
-                    <Link 
+                    <Link
+                        title="Link to front page"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"
@@ -31,7 +32,8 @@ function HeaderComp() {
                     </Link>
                 </li>
                 <li>
-                    <Link 
+                    <Link
+                        title="Link to About Us page"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"
@@ -41,7 +43,8 @@ function HeaderComp() {
                     </Link>
                 </li>
                 <li>
-                    <Link 
+                    <Link
+                        title="Link to shopping cart"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"
@@ -51,7 +54,8 @@ function HeaderComp() {
                     </Link>
                 </li>
                 <li>
-                    <Link 
+                    <Link
+                        title="Link to login page"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"
@@ -62,6 +66,7 @@ function HeaderComp() {
                 </li>
                 <li>
                     <Link
+                        title="Link to site administration panel"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"

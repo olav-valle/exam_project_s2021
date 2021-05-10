@@ -14,6 +14,9 @@ module.exports = {
     extend: {
       gridTemplateRows: {
         'itemCardLink': '50px minmax(900px, 1fr) 100px',
+      },
+      transitionProperty: {
+        'width': 'width'
       }
     },
     colors: {
@@ -36,9 +39,11 @@ module.exports = {
   },
   variants: {
     extend: {
+      transitionProperty: ['hover', 'focus'],
       textColor: ['children', 'children-hover', 'hover', 'disabled'],
       margin: ['children'],
       maxWidth: ['children'],
+      width: ['focus'],
       backgroundColor: ['children', 'children-hover', 'hover', 'focus', 'disabled'],
       borderColor: ['children', 'children-hover','hover', 'focus'],
       borderWidth: ['children', 'children-hover','hover', 'focus', 'disabled'],

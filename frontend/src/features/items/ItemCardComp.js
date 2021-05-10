@@ -36,7 +36,8 @@ const ItemCard = ({ item }) => {
                 border-grey-300
                 hover:border-yellow"
     >
-        <Link 
+        <Link
+            title="Open product page"
             className="
                 itemCardLink
                 border-4 
@@ -49,11 +50,13 @@ const ItemCard = ({ item }) => {
             to={"/shop/product/" + item.id}
             aria-label={"Product: " + item.name}
         >
-            <img 
+            <img
+                title="Item picture"
                 alt="picture of the product"
                 src={item.img ? item.img : "https://imgur.com/skXkXRr.png"}
             />
             <h3
+                title="Item Name"
                 className="
                     text-lg
                     font-semibold"
@@ -89,6 +92,7 @@ const ItemCard = ({ item }) => {
                 focus:border-black"
             onClick={() => onAdd(item)}
             name="AddToCart"
+            title="Add to cart"
         > 
             Add to cart
         </button>
