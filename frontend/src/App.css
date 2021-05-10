@@ -25,16 +25,16 @@
 /*    list-style: none;*/
 /*}*/
 
-.footer{
-    color: white;
-    padding: 1rem;
-    background-color: gray;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-top: 2rem;
-}
+/*.footer{*/
+/*    color: white;*/
+/*    padding: 1rem;*/
+/*    background-color: gray;*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    margin-top: 2rem;*/
+/*}*/
 
 body{
     margin-bottom: 4rem;

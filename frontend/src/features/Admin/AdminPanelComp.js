@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 
 const AdminPanelComp = () => {
 
+    //todo: fix responsive design on item list
 
     const items = useSelector(selectAllItems);
 
