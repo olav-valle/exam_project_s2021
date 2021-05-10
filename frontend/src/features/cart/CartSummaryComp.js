@@ -5,6 +5,10 @@ const CartSummaryComp = ({totalQty, totalPrice}) => {
 
     return (<div
             className="
+            fixed bottom-16
+            w-full
+            md:max-w-max
+            md:static
             flex flex-col justify-between p-4 shadow
             rounded
             bg-white

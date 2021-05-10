@@ -16,17 +16,21 @@ const NewItemFormComp = ({itemId}) => {
     let initialName = "";
     let initialDescr = "";
     let initialPrice = "";
+    let initialImage = "";
+
 
     // If an item was found, set field values to item values
     if (item) {
         initialName = item.name;
         initialDescr = item.description;
         initialPrice = item.price;
+        initialImage = item.image;
     }
     // Set input fields to the values we decided above
     const [name, setName] = useState(initialName);
     const [descr, setDescr] = useState(initialDescr);
     const [price, setPrice] = useState(initialPrice);
+    const [image, setImage] = useState(initialImage);
 
     // Update local state values when a  field changes.
     // todo: validate input field values, and reset if invalid? (empty string etc..)
@@ -51,6 +55,16 @@ const NewItemFormComp = ({itemId}) => {
         }
     }
 
+    const onImageChange = e => setImage(e.target.value);
+    const onImageBlur = e => {
+        if (item) {
+            let newImage = e.target.value.trim();
+            if (newImage.length === 0) {
+                setImage(item.image);
+            }
+        }
+    }
+
     const onPriceChange = e => setPrice(e.target.value);
 
     const dispatch = useDispatch();
@@ -61,7 +75,8 @@ const NewItemFormComp = ({itemId}) => {
         let newItem = {
             name: name,
             description: descr,
-            price: price
+            price: price,
+            image: image
         }
 
         if (typeof item !== "undefined") {
@@ -76,6 +91,7 @@ const NewItemFormComp = ({itemId}) => {
             setName("");
             setPrice("");
             setDescr("");
+            setImage("");
         }
 
     }
@@ -89,7 +105,7 @@ const NewItemFormComp = ({itemId}) => {
 // to toggle "Finish" button disabled/enabled.
     const finishButtonEnabled = item ?
         // is name, description or price in component state different from item in store?
-        ((name !== item.name) || (descr !== item.description) || (price !== item.price))
+        ((name !== item.name) || (descr !== item.description) || (price !== item.price)) || (image !== item.image)
         // If no item, are all 3 fields filed with values?
         : (name && descr && price);
 
@@ -150,6 +166,23 @@ const NewItemFormComp = ({itemId}) => {
                         onBlur={onDescrBlur}
                     />
                 </label>
+
+                <label htmlFor="itemImage">
+                    Image name:
+                    <input
+                        // aria-labelledby="itemDescr"
+                        className="border focus:ring-2"
+                        type="text"
+                        // id="itemDescr"
+                        name="itemImage"
+                        value={image}
+                        placeholder="Item image file name"
+                        onChange={onImageChange}
+                        onBlur={onImageBlur}
+                    />
+
+                </label>
+
             </div>
 
             <div id="item-price-buttons" className="flex flex-row justify-between children:mx-2">

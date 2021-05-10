@@ -91,6 +91,9 @@ export default cartSlice.reducer;
 // ### EXPORT SELECTORS ###
 export const getCartContents = (state) => state.cart.cartContent;
 
+
+
+
 export const selectCartItemById = (state, itemId) =>
     state.cart.cartContent.find(item => item.id === itemId);
 
