@@ -105,66 +105,75 @@ const NewItemFormComp = ({itemId}) => {
     }
 
 
-
     return (
         <div aria-roledescription="form"
              onKeyDown={(e) => e.key !== 'Enter'}
-             className=" flex flex-row items-center h-15 bg-grey-200 my-1 children:mx-1 ">
+             className="flex flex-col sm:flex-row sm:items-center h-15 bg-grey-200 my-1 children:my-1"
+        >
+
             {item
                 ?
-                <label htmlFor="itemId">
+                <label id="item-id" className="flex flex-row sm:flex-col" htmlFor="itemId">
                     ID:
                     <p>{itemId}</p>
-                </label> : ""}
-            <label htmlFor="itemName">Name:
-                <input
-                    // aria-labelledby="itemName"
-                    className=" border focus:ring-2"
-                    type="text"
-                    // id="itemName"
-                    name="itemName"
-                    value={name}
-                    placeholder=" Item name"
-                    onChange={onNameChange}
-                    onBlur={onNameBlur}
-                />
-            </label>
+                </label>
+                :
+                ""
+            }
+            <div id="item-name-descr" className="flex flex-col lg:flex-row children:mx-1">
 
-            <label htmlFor="itemDescr">Description:
-                <input
-                    // aria-labelledby="itemDescr"
-                    className="border focus:ring-2"
-                    type="text"
-                    // id="itemDescr"
-                    name="itemDescr"
-                    value={descr}
-                    placeholder=" Describe the item"
-                    onChange={onDescrChange}
-                    onBlur={onDescrBlur}
-                />
-            </label>
 
-            <label
-                // htmlFor="itemPrice"
-            >
-                Price:
-                <input
-                    // aria-labelledby="itemPrice"
-                    className="border focus:ring-2 w-16"
-                    type="number"
-                    min="0"
-                    // id="itemPrice"
-                    name="itemPrice"
-                    value={price}
-                    placeholder="0"
-                    onChange={onPriceChange}
-                />
-            </label>
+                <label htmlFor="itemName">Name:
+                    <input
+                        // aria-labelledby="itemName"
+                        className=" border focus:ring-2"
+                        type="text"
+                        // id="itemName"
+                        name="itemName"
+                        value={name}
+                        placeholder=" Item name"
+                        onChange={onNameChange}
+                        onBlur={onNameBlur}
+                    />
+                </label>
 
-            <button
-                disabled={finishButtonEnabled ? "" : "disabled"}
-                onClick={onSubmitClick}
-                className="
+                <label htmlFor="itemDescr">Description:
+                    <input
+                        // aria-labelledby="itemDescr"
+                        className="border focus:ring-2"
+                        type="text"
+                        // id="itemDescr"
+                        name="itemDescr"
+                        value={descr}
+                        placeholder=" Describe the item"
+                        onChange={onDescrChange}
+                        onBlur={onDescrBlur}
+                    />
+                </label>
+            </div>
+
+            <div id="item-price-buttons" className="flex flex-row justify-between children:mx-2">
+                <label
+                    // htmlFor="itemPrice"
+                >
+                    Price:
+                    <input
+                        // aria-labelledby="itemPrice"
+                        className="border focus:ring-2 w-16"
+                        type="number"
+                        min="0"
+                        // id="itemPrice"
+                        name="itemPrice"
+                        value={price}
+                        placeholder="0"
+                        onChange={onPriceChange}
+                    />
+                </label>
+
+                <button
+                    disabled={finishButtonEnabled ? "" : "disabled"}
+                    onClick={onSubmitClick}
+                    className="
                 disabled:bg-grey-300 disabled:text-grey-700 disabled:border-grey-700
                 border
                 rounded
@@ -172,14 +181,14 @@ const NewItemFormComp = ({itemId}) => {
                 bg-green-light focus:ring-2
                 hover:bg-green-dark font-bold hover:text-white
                 focus:text-white focus:bg-green-dark px-1"
-            >
-                Save
-            </button>
-            {item
-                ?
-                <button
-                    onClick={onDelete}
-                    className="
+                >
+                    Save
+                </button>
+                {item
+                    ?
+                    <button
+                        onClick={onDelete}
+                        className="
                 px-1
                 border rounded
                 self-end
@@ -187,9 +196,10 @@ const NewItemFormComp = ({itemId}) => {
                 font-bold
                 hover:bg-red-600 hover:text-white
                 focus:text-white focus:bg-green-600"
-                >
-                    Delete
-                </button> : ""}
+                    >
+                        Delete
+                    </button> : ""
+                }</div>
 
         </div>
     )
