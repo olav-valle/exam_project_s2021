@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {getItemById} from "../../app/client";
-import {itemDelete} from "./itemsSlice";
-import {useDispatch} from "react-redux";
+import {itemDelete, selectItemById} from "./itemsSlice";
+import {useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
 
 const ItemDetail =() => {
     const {itemId} = useParams();
+    const id = Number(itemId);
     const dispatch = useDispatch();
-    const [item, setItem] = useState(null);
+    const item = useSelector(state => selectItemById(state, id));
 
-    
     // problem: When an item is deleted, it seems like maybe
     // this useEffect method is called again on the re-render
     // of ItemGridComp, but the server no longer has an item
@@ -21,46 +21,50 @@ const ItemDetail =() => {
     // we need to ensure that the re-render is only triggered once the store
     // has been updated with the new item list from the server.
 
-    useEffect(() => {
-        // since this is an effect hook, we have to do some hackery.
-        // since useEffect expects a cleanup function as callback,
-        // we make the callback an IIFE to avoid returning the Promise
-        // produced by the async/await function
-        (async () => {
-            try {
-                // we must await this expression,
-                // because getItemById is promise based.
-                // Without await, we end up with setItem(Promise<any>)
-                // instead of the resolved response body.
-                let item = await getItemById(itemId);
-                setItem(item);
-                console.log(item);
-            } catch (e) {
-            }
-        })() // The (expression...)() syntax makes it so that
-        // whatever is inside the first parens
-    }, [itemId])
+    // useEffect(() => {
+    //     // since this is an effect hook, we have to do some hackery.
+    //     // since useEffect expects a cleanup function as callback,
+    //     // we make the callback an IIFE to avoid returning the Promise
+    //     // produced by the async/await function
+    //     (async () => {
+    //         try {
+    //             // we must await this expression,
+    //             // because getItemById is promise based.
+    //             // Without await, we end up with setItem(Promise<any>)
+    //             // instead of the resolved response body.
+    //             let item = await getItemById(itemId);
+    //             setItem(item);
+    //             console.log(item);
+    //         } catch (e) {
+    //         }
+    //     })() // The (expression...)() syntax makes it so that
+    //     // whatever is inside the first parens
+    // }, [itemId])
 
     const onDelete = (id) => {
         dispatch(itemDelete(id))
     }
 
     return item ? (
-    <main>  
+    <div className="items-center justify-center m-auto">
         <div className="
-            m-auto
+            {/*mx-auto*/}
             my-16
             p-6
             bg-grey
             flex
-            inline-flex	
-            flex-grow
+            {/*max-w-min*/}
+
+            {/*inline-flex	*/}
             flex-col
-            justify-between
-            justify-items-center
-            border-4
-            border-yellow
-            rounded-2xl"
+            items-center
+            {/*flex-grow*/}
+            {/*justify-between*/}
+            {/*items-center*/}
+            {/*border-4*/}
+            {/*border-yellow*/}
+            {/*rounded-2xl*/}
+            "
         >
             <h2 className="
                 text-3xl
@@ -72,7 +76,7 @@ const ItemDetail =() => {
                 {item.name}
             </h2>
             <img
-                src="https://imgur.com/skXkXRr.png"
+                src={item.image ? "/ducks/"+item.image: "/ducks/404-duck.jpg"}
                 alt="picture of the product"
                 className="
                 max-w-xl
@@ -96,8 +100,9 @@ const ItemDetail =() => {
                     font-semibold"
             >
                 {item.price + ",- NOK"}
-                <button
-                    className="
+            </p>
+            <button
+                className="
                         ml-4
                         rounded
                         border-2
@@ -106,13 +111,12 @@ const ItemDetail =() => {
                         focus:bg-yellow
                         hover:border-black
                         focus:border-black"
-                    name="AddToCart"
-                > 
-                    Add to cart
-                </button> 
-            </p>   
+                name="AddToCart"
+            >
+                Add to cart
+            </button>
         </div>
-    </main>
+    </div>
     ) : (
         <main>
             <h2 className="

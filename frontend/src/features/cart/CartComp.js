@@ -16,21 +16,21 @@ function CartComp() {
         accumulator + (item.price * item.qty), 0);
 
     const cartList = cart.length > 0 ? cart.map(item => (
-        <CartItemCard itemId={item.id}/>
+        <CartItemCard key={item.id} itemId={item.id}/>
     )) : [];
 
     return (
 
-        <div className="relative flex flex-row justify-center mx-auto">
+        <div className="relative flex flex-col items-center md:flex-row md:items-start md:justify-center mx-auto">
             <div className="flex flex-col justify-center max-w-min mx-4">
-                    {cartList}
+                {cartList}
             </div>
             <CartSummaryComp totalPrice={totalPrice} totalQty={totalQty}/>
         </div>
 
 
     );
-}
+};
 
 export default CartComp;
 

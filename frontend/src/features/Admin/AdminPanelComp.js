@@ -16,12 +16,12 @@ const AdminPanelComp = () => {
     }
 
     return (
-        <main className="flex flex-col justify-center max-w-min mx-auto">
+        <div className="flex flex-col justify-center max-w-min mx-auto">
             <h1>Add new item:</h1>
             <NewItemFormComp/>
             <h1>Administrate existing items:</h1>
             {itemsList}
-        </main>
+        </div>
     )
 
 

@@ -26,7 +26,7 @@ public class Setup implements CommandLineRunner {
 //    this.itemRepository.deleteAll();
 //
 //
-//    this.itemRepository.save(new Item("Shoes", 500, "Shoe pair from Nike"));
+//    this.itemRepository.save(new Item("Linux Duck", 123, "Should be a rubber penguin, to be honest...", "linux-duck.jpg" ));
 //    this.itemRepository.save(new Item("Green t-shirt", 200, "Some green t-shirt"));
 //    this.itemRepository.save(new Item("Blue Jeans", 230, "Random blue jeans"));
 //    this.itemRepository.save(new Item("Red Jeans", 299, "From the J. Vaughan Collection"));
