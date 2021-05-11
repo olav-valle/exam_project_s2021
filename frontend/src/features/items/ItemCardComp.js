@@ -1,7 +1,7 @@
 import '../../App.css';
 import {useDispatch} from "react-redux";
-import { Link } from "react-router-dom";
-import {itemAdded} from "../cart/cartSlice";
+import {Link} from "react-router-dom";
+import {itemAddedToCart} from "../cart/cartSlice";
 
 /**
  * Takes a "item" object from the API and creates a card component 
@@ -14,8 +14,8 @@ const ItemCard = ({ item }) => {
 
     const dispatch = useDispatch();
   
-    const onAdd = (item) => {
-        dispatch(itemAdded(item));
+    const onAddToCart = (item) => {
+        dispatch(itemAddedToCart(item));
     }
 
     return (
@@ -90,7 +90,7 @@ const ItemCard = ({ item }) => {
                 focus:bg-yellow
                 hover:border-black
                 focus:border-black"
-            onClick={() => onAdd(item)}
+            onClick={() => onAddToCart(item)}
             name="AddToCart"
             title="Add to cart"
         > 

@@ -10,12 +10,11 @@ const initialState = cartFromLocalStorage
         cartStatus: "idle",
     }
 
-//todo: persist cart state in browser localStorage?
 const cartSlice = createSlice({
         name: 'cart',
         initialState,
         reducers: {
-            itemAdded: {
+            itemAddedToCart: {
                 reducer(state, action) {
                     // action.payload should be an item object
                     // if item in cart, increment qty
@@ -84,7 +83,7 @@ const cartSlice = createSlice({
     }
 );
 
-export const {itemAdded, itemQuantityChanged, itemRemovedFromCart} = cartSlice.actions;
+export const {itemAddedToCart, itemQuantityChanged, itemRemovedFromCart} = cartSlice.actions;
 
 export default cartSlice.reducer;
 

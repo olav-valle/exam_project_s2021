@@ -79,7 +79,6 @@ const postNewItem = async (newItem) => {
                 body: JSON.stringify(newItem),
                 headers: header
             })
-        //todo: catch and handle server errors. Check status field in response body.
         if (response.ok) {
             return await response.json();
         }

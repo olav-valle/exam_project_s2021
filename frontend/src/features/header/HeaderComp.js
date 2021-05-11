@@ -10,12 +10,9 @@ function HeaderComp() {
     const isSmallScreen = useMediaQuery({query: '(max-width: 1024px)'})
 
     const toggleMenuOnClick = (e) => {
-        // e.preventDefault();
-        // when shown, attach document listener
-        // when hidden, detach doc listener
         setMenuState(!menuState);
 
-        if(!menuState){
+        if (!menuState) {
             e.stopPropagation()
 
             document.removeEventListener('click', closeMenu);
@@ -25,7 +22,7 @@ function HeaderComp() {
             document.addEventListener('click', closeMenu);
         }
     }
-    const closeMenu = ()=> {
+    const closeMenu = () => {
         setMenuState(false);
     }
 
@@ -120,7 +117,8 @@ function HeaderComp() {
                         aria-expanded={menuState}
                         onClick={toggleMenuOnClick}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none"
+                             viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                   d="M4 6h16M4 12h16M4 18h16"/>
