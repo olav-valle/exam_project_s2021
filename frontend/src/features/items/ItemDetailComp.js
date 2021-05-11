@@ -1,7 +1,8 @@
 import React from "react";
 import {selectItemById} from "./itemsSlice";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import {itemAddedToCart} from "../cart/cartSlice";
 
 const ItemDetail = () => {
     const {itemId} = useParams();
@@ -10,9 +11,8 @@ const ItemDetail = () => {
     const item = useSelector(state => selectItemById(state, id));
 
 
-
     const onAdd = () => {
-        dispatch(itemAdded(item));
+        dispatch(itemAddedToCart(item));
     }
 
     return item ? (
@@ -71,13 +71,13 @@ const ItemDetail = () => {
                         focus:bg-yellow
                         hover:border-black
                         focus:border-black"
-                name="AddToCart"
-                onClick={onAdd}
-            >
-                Add to cart
-            </button>
+                    name="AddToCart"
+                    onClick={onAdd}
+                >
+                    Add to cart
+                </button>
+            </div>
         </div>
-    </div>
     ) : (
         <div>
             <h2 className="

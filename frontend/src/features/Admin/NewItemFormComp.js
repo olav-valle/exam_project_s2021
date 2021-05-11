@@ -1,13 +1,16 @@
 import React, {useState} from "react";
-import {addItem, itemDelete, itemUpdated, selectItemById} from "../items/itemsSlice";
+import {addItem, itemDeleted, itemUpdated, selectItemById} from "../items/itemsSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 // This component can either be used as an empty form for adding new items to the database,
 // or the form can be filled with the data of an existing item and edited.
 const NewItemFormComp = ({itemId}) => {
+
+    const dispatch = useDispatch();
+
     // Can we find an item matching the itemId prop?
     let id = ""
-    if (itemId) id = itemId;
+    if (itemId) id = Number(itemId);
     const item = useSelector(state =>
         selectItemById(state, id));
 
@@ -42,6 +45,7 @@ const NewItemFormComp = ({itemId}) => {
             }
         }
     }
+
     const onDescriptionInputChange = e => setDescription(e.target.value);
     const onDescriptionInputBlur = e => {
         if (item) {
@@ -64,7 +68,6 @@ const NewItemFormComp = ({itemId}) => {
 
     const onPriceChange = e => setPrice(e.target.value);
 
-    const dispatch = useDispatch();
 
 // Submit button click action
     const onSubmitClick = () => {
@@ -95,7 +98,7 @@ const NewItemFormComp = ({itemId}) => {
 
     // Delete item button
     const onDeleteClick = () => {
-        dispatch(itemDelete(item.id));
+        dispatch(itemDeleted(item.id));
     }
 
 // boolean describing whether all fields in form have valid values,

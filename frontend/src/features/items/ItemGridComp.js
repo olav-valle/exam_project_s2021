@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {fetchItemProgressStatus, selectAllItems} from "./itemsSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import ItemCard from "./ItemCardComp";
 
 
 export const ItemGrid = () => {
 
-    const dispatch = useDispatch();
     //Status from API
     const fetchStatus = useSelector(fetchItemProgressStatus);
     //item list from API
     const items = useSelector(selectAllItems);
     //search string
-    const [search, setSearch] = React.useState("");
+    const [search, setSearch] = useState("");
     //list of itemCards
     const [itemList, setItemList] = useState([]);
 
@@ -26,22 +25,22 @@ export const ItemGrid = () => {
     /**
      * Filter displayed items by searching by item name or description
      */
-    function itemSearch(){
-        const filterdItems = items.filter((item) => 
+    function itemSearch() {
+        const filteredItems = items.filter((item) =>
             item.name.toLowerCase().includes(search.toLowerCase())
             || item.description.toLowerCase().includes(search.toLowerCase())
         );
         console.log(items);
-        let temp = filterdItems.map(item => 
-            <ItemCard item={item}  key={item.id}/>
+        let temp = filteredItems.map(item =>
+            <ItemCard item={item} key={item.id}/>
         );
 
         setItemList(temp);
     }
 
-    return fetchStatus === 'rejected' ? (<p>ERROR LOADING ITEMS</p>)
-        : (
-            <div title="All products">
+    return fetchStatus === 'rejected'
+        ? (<p>ERROR LOADING ITEMS</p>)
+        : (<div title="All products">
                 <div
                     title="searchBox"
                     className="
@@ -54,7 +53,7 @@ export const ItemGrid = () => {
                     "
                 >
                     <label
-                        for="itemSearchBox"
+                        htmlFor="itemSearchBox"
                         className="
                             text-lg
                             font-semibold
@@ -79,7 +78,7 @@ export const ItemGrid = () => {
                     />
                 </div>
                 <h2 className="text-7xl font-bold text-center">
-                    Our Pro-ducks
+                    Our Produckts
                 </h2>
                 <div
                     className="
