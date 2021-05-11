@@ -5,19 +5,6 @@ const header = {
     'Accept': "application/hal+json",
 };
 
-//todo: refactor item specific fetch()'s to use
-// HAL _links from object instead of itemId
-
-// Make GET request to a helper method in backend API,
-// to reset DB state.
-const resetDatabase = async () => {
-    try {
-        return await fetch(URL + '/reset', {method: "GET"});
-    } catch (e) {
-        console.log(e);
-    }
-}
-
 // SELECT all items in backend DB
 const getItems = async () => {
     try {
@@ -26,12 +13,13 @@ const getItems = async () => {
                 headers: header
             }
         );
+        if(response.ok){
         const body = await response.json();
         return body._embedded.items;
-    } catch (e) {
-        throw e
+            }
+    } catch (err) {
+        return err;
     }
-
 }
 
 // SELECT specific item by id
@@ -46,8 +34,8 @@ const getItemById = async (itemId) => {
             return await response.json();
         }
         return await Promise.reject();
-    } catch (e) {
-        throw e
+    } catch (err) {
+        return err;
     }
 }
 
@@ -64,8 +52,8 @@ const deleteItem = async (itemId) => {
             return response;
         }
         return await Promise.reject();
-    } catch (e) {
-        throw e
+    } catch (err) {
+        return err;
     }
 }
 
@@ -83,8 +71,8 @@ const postNewItem = async (newItem) => {
             return await response.json();
         }
         return await Promise.reject();
-
     } catch (err) {
+        return err;
     }
 }
 
@@ -108,9 +96,9 @@ const updateItem = async (existingItem) => {
         }
         return await Promise.reject();
     } catch (err) {
-
+        return err;
     }
 }
 
 
-export {getItems, deleteItem, postNewItem, getItemById, resetDatabase, updateItem}
+export {getItems, deleteItem, postNewItem, getItemById, updateItem}

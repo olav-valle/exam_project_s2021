@@ -5,7 +5,6 @@ const Footer = () => (
     <div className="
             text-black text-center
             w-full
-            {/*justify-self-end */}
             bg-grey-400
             mt-8 "
     >

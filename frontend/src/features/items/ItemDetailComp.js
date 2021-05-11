@@ -1,13 +1,19 @@
 import React from "react";
 import {selectItemById} from "./itemsSlice";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
 const ItemDetail = () => {
     const {itemId} = useParams();
     const id = Number(itemId);
+    const dispatch = useDispatch();
     const item = useSelector(state => selectItemById(state, id));
 
+
+
+    const onAdd = () => {
+        dispatch(itemAdded(item));
+    }
 
     return item ? (
         <div className="items-center justify-center m-auto">
@@ -65,14 +71,15 @@ const ItemDetail = () => {
                         focus:bg-yellow
                         hover:border-black
                         focus:border-black"
-                    name="AddToCart"
-                >
-                    Add to cart
-                </button>
-            </div>
+                name="AddToCart"
+                onClick={onAdd}
+            >
+                Add to cart
+            </button>
         </div>
+    </div>
     ) : (
-        <main>
+        <div>
             <h2 className="
                 text-3xl
                 font-bold
@@ -82,7 +89,7 @@ const ItemDetail = () => {
             >
                 No item with id {itemId} in store
             </h2>
-        </main>
+        </div>
     )
 }
 

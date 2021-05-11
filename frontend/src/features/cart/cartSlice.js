@@ -77,6 +77,18 @@ const cartSlice = createSlice({
                         }
                     }
                 }
+            },
+            allItemsRemovedFromCart: {
+                reducer(state, action){
+                    state.cartContent = [];
+                },
+                prepare(){
+                    return{
+                        payload: {
+
+                        }
+                    }
+                }
             }
         }
 
