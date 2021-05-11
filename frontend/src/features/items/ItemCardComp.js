@@ -1,26 +1,25 @@
-import '../../App.css';
 import {useDispatch} from "react-redux";
-import { Link } from "react-router-dom";
-import {itemAdded} from "../cart/cartSlice";
+import {Link} from "react-router-dom";
+import {itemAddedToCart} from "../cart/cartSlice";
 
 /**
- * Takes a "item" object from the API and creates a card component 
+ * Takes a "item" object from the API and creates a card component
  * item should to contain (id, name, description, price, img)
- * 
- * @param { item } param0 
+ *
+ * @param { item } param0
  * @returns <ItemCard>
  */
-const ItemCard = ({ item }) => {
+const ItemCard = ({item}) => {
 
     const dispatch = useDispatch();
-  
-    const onAdd = (item) => {
-        dispatch(itemAdded(item));
+
+    const onAddToCart = (item) => {
+        dispatch(itemAddedToCart(item));
     }
 
     return (
-    <article 
-        className="
+        <article
+            className="
                 m-4
                 p-3
                 w-full
@@ -35,10 +34,10 @@ const ItemCard = ({ item }) => {
                 rounded-md
                 border-grey-300
                 hover:border-yellow"
-    >
-        <Link
-            title="Open product page"
-            className="
+        >
+            <Link
+                title="Open product page"
+                className="
                 itemCardLink
                 border-4 
                 border-grey-300
@@ -47,42 +46,42 @@ const ItemCard = ({ item }) => {
                 flex-grow
                 flex-col
                 justify-between"
-            to={"/shop/product/" + item.id}
-            aria-label={"Product: " + item.name}
-        >
-            <img
-                title="Item picture"
-                alt="picture of the product"
-                src={item.image ? "/ducks/"+item.image : "https://imgur.com/skXkXRr.png"}
-            />
-            <h3
-                title="Item Name"
-                className="
+                to={"/shop/product/" + item.id}
+                aria-label={"Product: " + item.name}
+            >
+                <img
+                    title="Item picture"
+                    alt="picture of the product"
+                    src={item.image ? "/ducks/" + item.image : "/ducks/404-duck.jpg"}
+                />
+                <h3
+                    title="Item Name"
+                    className="
                     text-lg
                     font-semibold"
-            >
-                {item.name ? item.name : "Missing Pro-Duckt name"}
-            </h3>
-            <p 
-                title="item description"
-                className="
+                >
+                    {item.name ? item.name : "Missing Pro-Duckt name"}
+                </h3>
+                <p
+                    title="item description"
+                    className="
                     overflow-hidden
                     flex-grow
                     text-lg"
-            >
-                {item.description ? item.description : "No pro-duckt description"}
-            </p>
-            <p
-                title="item price"
-                className="
+                >
+                    {item.description ? item.description : "No pro-duckt description"}
+                </p>
+                <p
+                    title="item price"
+                    className="
                     text-lg
                     font-semibold"
-            >
-                {item.price ? item.price + ",- NOK" : "Just because this have no price does not mean it's free"} 
-            </p>    
-        </Link>
-        <button
-            className="
+                >
+                    {item.price ? item.price + ",- NOK" : "Just because this have no price does not mean it's free"}
+                </p>
+            </Link>
+            <button
+                className="
                 rounded
                 border-2
                 border-gray-500
@@ -90,13 +89,13 @@ const ItemCard = ({ item }) => {
                 focus:bg-yellow
                 hover:border-black
                 focus:border-black"
-            onClick={() => onAdd(item)}
-            name="AddToCart"
-            title="Add to cart"
-        > 
-            Add to cart
-        </button>
-    </article>)
+                onClick={() => onAddToCart(item)}
+                name="AddToCart"
+                title="Add to cart"
+            >
+                Add to cart
+            </button>
+        </article>)
 }
 
 export default ItemCard;

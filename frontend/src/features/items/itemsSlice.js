@@ -23,7 +23,7 @@ export const addItem = createAsyncThunk(
     }
 )
 
-export const itemDelete = createAsyncThunk(
+export const itemDeleted = createAsyncThunk(
     'items/itemDeleted',
     async (itemId) => {
         return await deleteItem(itemId);
@@ -45,11 +45,9 @@ const itemsSlice = createSlice({
             reducer(state, action) {
 
             },
-            prepare( ){
+            prepare() {
                 return {
-                    payload: {
-
-                    }
+                    payload: {}
                 }
             }
         }
@@ -78,22 +76,19 @@ const itemsSlice = createSlice({
         },
         [addItem.rejected]: (state, action) => {
             state.addItemStatus = 'error';
-            // todo: implement reducer to reset this status to 'idle'
-            //  after error has been handled
         },
 
         // ### DELETE ITEM REDUCER
-        [itemDelete.pending]: (state, action) => {
+        [itemDeleted.pending]: (state, action) => {
             state.deleteItemStatus = 'pending';
         },
-        [itemDelete.fulfilled]: (state, action) => {
+        [itemDeleted.fulfilled]: (state, action) => {
             state.deleteItemStatus = 'fulfilled';
             state.ducks = state.ducks.filter(item => item.id !== action.meta.arg)
 
         },
-        [itemDelete.rejected]: (state, action) => {
+        [itemDeleted.rejected]: (state, action) => {
             state.deleteItemStatus = 'rejected';
-            // todo: handle this error somehow? Warning/confirmation modal?
         },
 
         [itemUpdated.pending]: (state, action) => {
@@ -114,11 +109,8 @@ export default itemsSlice.reducer;
 
 // ### SELECTOR EXPORTS ###
 export const selectItemById = (state, itemId) => {
-    // const duck =
-        return state.products.ducks.find(item => item.id === itemId);
-    // return duck ? duck : null;
+    return state.products.ducks.find(item => item.id === itemId);
 }
-
 export const selectAllItems = (state) => state.products.ducks;
 export const fetchItemProgressStatus = (state) => state.products.fetchStatus;
 export const addItemProgressStatus = (state) => state.products.addItemStatus;

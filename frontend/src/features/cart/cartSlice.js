@@ -10,12 +10,11 @@ const initialState = cartFromLocalStorage
         cartStatus: "idle",
     }
 
-//todo: persist cart state in browser localStorage?
 const cartSlice = createSlice({
         name: 'cart',
         initialState,
         reducers: {
-            itemAdded: {
+            itemAddedToCart: {
                 reducer(state, action) {
                     // action.payload should be an item object
                     // if item in cart, increment qty
@@ -96,7 +95,7 @@ const cartSlice = createSlice({
     }
 );
 
-export const {itemAdded, itemQuantityChanged, itemRemovedFromCart, allItemsRemovedFromCart} = cartSlice.actions;
+export const {itemAddedToCart, itemQuantityChanged, itemRemovedFromCart, allItemsRemovedFromCart} = cartSlice.actions;
 
 export default cartSlice.reducer;
 
@@ -106,4 +105,8 @@ export const getCartContents = (state) => state.cart.cartContent;
 export const selectCartItemById = (state, itemId) =>
     state.cart.cartContent.find(item => item.id === itemId);
 
-
+// when using selector functions with parameters other than just 'state'
+// we must make sure to pass both the parameter, and 'state' when calling
+// the selector.
+export const getItemQtyByItemId = (state, itemId) =>
+    (state.cart.cartContent.find(item => item.id === itemId)).qty;

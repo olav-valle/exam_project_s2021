@@ -1,13 +1,15 @@
 import React from "react";
-import '../../App.css';
 
 const Footer = () => (
-    <div className="text-black w-full justify-self-end bg-grey-400
-    {/*fixed bottom-0 left-0 */}
-    {/*absolute bottom-0*/}
-    mt-8 text-center">
+    <div className="
+            text-black text-center
+            w-full
+            bg-grey-400
+            mt-8 "
+    >
 
-        <p >All rights reserved. Created by Merge Conflict, 2021.</p> <p>Ducks are borrowed from https://devducks.com/ and are Copyright © 2020 Hexical Labs LLC </p>
+        <p>All rights reserved. Created by <a className="underline hover:text-yellow" href="mailto:olavval@stud.ntnu.no">Team Merge Conflict</a>, 2021.</p>
+        <p>Ducks are borrowed from <a className="underline hover:text-yellow" href="https://devducks.com/">devDucks.com</a> and are Copyright © 2020 Hexical Labs LLC </p>
 
     </div>
 );
