@@ -7,32 +7,33 @@ function About() {
     const ulStyle = "list-disc pl-16 pb-4"
     const h2Style = "font-bold text-xl"
     return (
-        <div className="flex flex-col mx-auto max-w-2xl leading-relaxed">
+        <div className="flex flex-col mt-8 mx-auto max-w-2xl leading-relaxed">
             <h1 className="font-bold text-3xl">About us</h1>
             <p className={paragraphStyle}>
-                This store combines two 4th semester exam projects from courses at NTNU Ålesund; "Application
+                This web shop is the combination of two 4th semester exam projects from courses at NTNU Ålesund; "Application
                 Development" (IDATA2306, "AppDev") and "Web Technology" (IDATA2301, "WebTek").
+                It was developed by Joachim Hauso Amundsen, Thomas Flem Synnes and Olav Valle.
             </p>
             <h2 className={h2Style}>Application Development</h2>
             <p className={paragraphStyle}>The goal of the AppDev project was to implement the backend for a web shop. The requirement was to
                 support a typical online shopping process, from the user entering the shop webpage, to final order
-                generation through some form of UI. The fulfilment of this included:
-
-
+                generation through some form of UI.
             </p>
+            <p>The fulfilment of this included:</p>
             <ul className={ulStyle}>
                 <li>A REST API and item/warehouse DB</li>
                 <li>A rudimentary login system</li>
                 <li>A rudimentary user administration system</li>
                 <li>User session handling (shopping cart management)</li>
-                <li>A simplified mock payment system.</li>
+                <li>A simplified mock order checkout system.</li>
             </ul>
 
             <h2 className={h2Style}>Web Technology</h2>
             <p className={paragraphStyle}>
                 The goal of the WebTek project was to design a dynamic web site, the exact details of which were left
-                open. The requirements were that the final product fulfilled certain conditions. It should:
+                open. The requirements were that the final product fulfilled certain conditions.
             </p>
+            <p>It should:</p>
             <ul className={ulStyle}>
                 <li>Be a dynamic frontend/web application.</li>
                 <li>Fetch data from an external API.</li>
@@ -45,7 +46,13 @@ function About() {
                 Our chosen goal became to implement the frontend for a web shop in React. As these requirements fit well
                 with the functionality required by the AppDev project, it was logical to combine the two projects. This
                 approach was also recommended by the course lecturers, Girts Strazdins, PhD (IDATA2301) and Di Wu
-                (IDATA2306)</p>
+                (IDATA2306).
+            </p>
+
+            <h3 className="font-bold text-lg">Disclaimer:</h3>
+            <p className="italic">
+                The rubber duck images used in this project were borrowed from the great people at <a className="hover:text-blue-light underline" href="https://devrant.com">devRant</a> and <a className="hover:text-blue-light underline" href="https://devducks.com">devDucks</a>.
+            </p>
         </div>
     );
 }

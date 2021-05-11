@@ -8,8 +8,8 @@ const Footer = () => (
             mt-8 "
     >
 
-        <p>All rights reserved. Created by Merge Conflict, 2021.</p>
-        <p>Ducks are borrowed from https://devducks.com/ and are Copyright © 2020 Hexical Labs LLC </p>
+        <p>All rights reserved. Created by <a className="underline hover:text-yellow" href="mailto:olavval@stud.ntnu.no">Team Merge Conflict</a>, 2021.</p>
+        <p>Ducks are borrowed from <a className="underline hover:text-yellow" href="https://devducks.com/">devDucks.com</a> and are Copyright © 2020 Hexical Labs LLC </p>
 
     </div>
 );

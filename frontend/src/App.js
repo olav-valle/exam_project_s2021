@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import ItemGrid from "./features/items/ItemGridComp";
 import HeaderComp from "./features/header/HeaderComp";
 import About from "./features/pages/About";
-import LoginComp from "./features/users/LoginComp";
 import itemDetails from "./features/items/ItemDetailComp";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Footer from "./features/header/Footer";
@@ -33,7 +32,6 @@ function App() {
                         <Route path="/" exact component={ItemGrid}/>
                         <Route path="/about" component={About}/>
                         <Route path="/cart" component={CartComp}/>
-                        <Route path="/login" component={LoginComp}/>
                         <Route path="/admin" component={AdminPanelComp}/>
                         <Route path="/shop/product/:itemId" component={itemDetails}/>
                     </Switch>
