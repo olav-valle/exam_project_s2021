@@ -1,14 +1,9 @@
 package no.ntnu.exam2021.backend;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import no.ntnu.exam2021.backend.item.Item;
 import no.ntnu.exam2021.backend.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 //@Component
 @Configuration
