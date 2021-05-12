@@ -1,5 +1,5 @@
-// const URL = '/api/items'
-const URL = 'http://localhost:8080/api/items'
+const URL = '/api/items'
+// const URL = 'http://localhost:8080/api/items'
 const header = {
     'Content-Type': "application/hal+json",
     'Accept': "application/hal+json",

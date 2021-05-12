@@ -99,14 +99,14 @@ function HeaderComp() {
 
             {isSmallScreen ?
                 <div
-                    aria-label="Drop down navigation menu"
-                    aria-roledescription="button"
-                    aria-haspopup="menu"
-                    aria-expanded={menuState}
-                    className="relative"
+
                 >
                     <button
-
+                        aria-label="Drop down navigation menu"
+                        aria-roledescription="button"
+                        aria-haspopup="menu"
+                        aria-expanded={menuState}
+                        className="relative"
                         onClick={toggleMenuOnClick}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none"

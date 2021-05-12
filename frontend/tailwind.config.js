@@ -9,14 +9,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     boxShadow: {
-      DEFAULT: '0 2px 8px rgba(0, 0, 0, 0.26)'
+      DEFAULT: '0 2px 8px rgba(0, 0, 0, 0.26)',
+      orange:  '0 2px 12px rgba(252, 163, 17, 1)'
     },
     extend: {
       gridTemplateRows: {
         'itemCardLink': '50px minmax(900px, 1fr) 100px',
       },
       transitionProperty: {
-        'width': 'width'
+        'width': 'width',
+        'shadow': 'shadow'
       }
     },
     colors: {
@@ -39,6 +41,7 @@ module.exports = {
   },
   variants: {
     extend: {
+      boxShadow: ['hover', 'focus'],
       transitionProperty: ['hover', 'focus'],
       textColor: ['children', 'children-hover', 'hover', 'disabled'],
       margin: ['children'],

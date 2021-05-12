@@ -82,7 +82,6 @@ const NewItemFormComp = ({itemId}) => {
         if (typeof item !== "undefined") {
             // Item exists, and we need to update it
             dispatch(itemUpdated({...newItem, id: item.id, _links: item._links}));
-            // const promise = updateItem({...newItem, id: item.id, _links: item._links});
         }
         if (typeof item === "undefined") {
             // item does not exist, and we need to create a new one
@@ -125,7 +124,8 @@ const NewItemFormComp = ({itemId}) => {
                 :
                 ""
             }
-            <div id="item-name-description" className="flex flex-col lg:flex-row children:mx-1">
+            <div id="item-name-description"
+                 className="flex flex-col lg:flex-row children:mx-1">
 
 
                 <label htmlFor="itemName">Name:

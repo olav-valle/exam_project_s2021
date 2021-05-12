@@ -10,7 +10,6 @@ import {itemAddedToCart} from "../cart/cartSlice";
  * @returns <ItemCard>
  */
 const ItemCard = ({item}) => {
-
     const dispatch = useDispatch();
 
     const onAddToCart = (item) => {
@@ -27,20 +26,24 @@ const ItemCard = ({item}) => {
                 md:w-1/3
                 lg:w-1/4
                 xl:w-1/5
-                bg-grey-300
                 flex
                 flex-col
-                border-4
+                border
                 rounded-md
-                border-grey-300
-                hover:border-yellow"
+                border-white
+                shadow
+                focus-within:border-yellow
+                focus-within:shadow-orange
+                hover:border-yellow
+                hover:shadow-orange
+                "
         >
             <Link
                 title="Open product page"
                 className="
                 itemCardLink
                 border-4 
-                border-grey-300
+                border-white
                 focus:border-yellow
                 flex
                 flex-grow
@@ -51,7 +54,7 @@ const ItemCard = ({item}) => {
             >
                 <img
                     title="Item picture"
-                    alt="picture of the product"
+                    alt={"A picture of " + item.name}
                     src={item.image ? "/ducks/" + item.image : "/ducks/404-duck.jpg"}
                 />
                 <h3

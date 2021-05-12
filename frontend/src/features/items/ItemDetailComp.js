@@ -37,7 +37,7 @@ const ItemDetail = () => {
                 </h2>
                 <img
                     src={item.image ? "/ducks/" + item.image : "/ducks/404-duck.jpg"}
-                    alt="picture of the product"
+                    alt={"A picture of " + item.name}
                     className="
                 max-w-xl
                 m-auto"

@@ -17,8 +17,21 @@ const CartItemCard = ({itemId}) => {
     }
 
     return item ? (
-        <div className="my-4 flex flex-row rounded shadow w-screen md:w-auto md:min-w-max">
+        <div className="
+        my-4
+        flex flex-row
+        rounded-md
+        border-white
+        shadow
+        focus-within:border-yellow
+        focus-within:shadow-orange
+        hover:border-yellow
+        hover:shadow-orange
+        w-screen
+        md:w-auto
+        md:min-w-max">
             <img
+                alt={"A picture of " + item.name}
                 className="w-36 object-contain rounded"
                 src={item.image ? "/ducks/" + item.image : "/ducks/404-duck.jpg"}
             />
