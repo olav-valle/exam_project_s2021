@@ -4,7 +4,7 @@ import ItemGrid from "./features/items/ItemGridComp";
 import HeaderComp from "./features/header/HeaderComp";
 import About from "./features/pages/About";
 import itemDetails from "./features/items/ItemDetailComp";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, HashRouter, Route, Switch} from 'react-router-dom';
 import Footer from "./features/header/Footer";
 import CartComp from "./features/cart/CartComp";
 import AdminPanelComp from "./features/Admin/AdminPanelComp";
@@ -24,7 +24,7 @@ function App() {
     },)
 
     return (
-        <Router>
+        <HashRouter>
             <div className="App flex flex-col h-screen justify-between">
                 <HeaderComp/>
                 <main className="flex-grow">
@@ -38,7 +38,7 @@ function App() {
                 </main>
                 <Footer/>
             </div>
-        </Router>
+        </HashRouter>
     );
 }
 

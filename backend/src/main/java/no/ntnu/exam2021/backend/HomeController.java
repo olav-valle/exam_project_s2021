@@ -1,5 +1,6 @@
 package no.ntnu.exam2021.backend;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +20,9 @@ public class HomeController {
     public String about() {
         return "index";
     }
+
     @RequestMapping(value="/admin")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String admin() {
         return "index";
     }
