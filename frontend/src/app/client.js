@@ -51,7 +51,7 @@ const deleteItem = async (itemId) => {
         if(response.ok){
             return response;
         }
-        return await Promise.reject();
+        return Promise.reject();
     } catch (err) {
         return err;
     }

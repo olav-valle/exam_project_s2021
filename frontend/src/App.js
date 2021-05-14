@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import ItemGrid from "./features/items/ItemGridComp";
 import HeaderComp from "./features/header/HeaderComp";
@@ -10,9 +10,12 @@ import CartComp from "./features/cart/CartComp";
 import AdminPanelComp from "./features/Admin/AdminPanelComp";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchItemProgressStatus, fetchItems} from "./features/items/itemsSlice";
+import LoginComp from "./features/users/LoginComp";
 
 function App() {
 
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userFetch, setUserFetch] = useState("idle");
     const dispatch = useDispatch();
 
     const fetchStatus = useSelector(fetchItemProgressStatus);
@@ -23,6 +26,26 @@ function App() {
         }
     },)
 
+    useEffect(async () => {
+        if (userFetch === "idle") {
+            try {
+                let user = await fetch("/user")
+                    .then(response => response.json());
+                let isAdmin = user.authorities.some(a => a.authority === "ROLE_ADMIN");
+                setIsAdmin(isAdmin);
+            } catch (e) {
+                throw e;
+            }
+        }
+    })
+
+    const getAdmin = async () => {
+        let user = await fetch("/user")
+            .then(response => response.json());
+        let isAdmin = user.authorities.some(a => a.authority === "ROLE_ADMIN");
+        return isAdmin;
+    }
+
     return (
         <HashRouter>
             <div className="App flex flex-col h-screen justify-between">
@@ -32,7 +55,7 @@ function App() {
                         <Route path="/" exact component={ItemGrid}/>
                         <Route path="/about" component={About}/>
                         <Route path="/cart" component={CartComp}/>
-                        <Route path="/admin" component={AdminPanelComp}/>
+                        <Route path="/admin" component={isAdmin ? AdminPanelComp : LoginComp}/>
                         <Route path="/shop/product/:itemId" component={itemDetails}/>
                     </Switch>
                 </main>

@@ -1,9 +1,12 @@
 package no.ntnu.exam2021.backend.security;
 
-import static no.ntnu.exam2021.backend.security.UserPermission.ITEM_WRITE;
 import static no.ntnu.exam2021.backend.security.UserRole.ADMIN;
 
 
+import javax.crypto.SecretKey;
+import no.ntnu.exam2021.backend.security.token.TokenAuthenticationFilter;
+import no.ntnu.exam2021.backend.security.token.TokenConfig;
+import no.ntnu.exam2021.backend.security.token.TokenVerifyer;
 import no.ntnu.exam2021.backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +18,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -25,13 +28,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final PasswordEncoder passwordEncoder;
-
   private final UserService userService;
+  private final SecretKey secretKey;
+  private final TokenConfig tokenConfig;
 
   @Autowired
-  public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, UserService userService) {
+  public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
+                                   UserService userService, SecretKey secretKey, TokenConfig tokenConfig) {
     this.passwordEncoder = passwordEncoder;
     this.userService = userService;
+    this.secretKey = secretKey;
+    this.tokenConfig = tokenConfig;
   }
 
   @Override
@@ -41,30 +48,48 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable()
 //        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+        .sessionManagement()
+        // JWT are "stateless", in that they don't reside on the server.
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        // We've defined our own filters to handle JWT auth and verification.
+        .addFilter(
+            new TokenAuthenticationFilter(
+                authenticationManager(),
+                tokenConfig,
+                secretKey))
+        .addFilterAfter(new TokenVerifyer(secretKey, tokenConfig), TokenAuthenticationFilter.class)
         .authorizeRequests()
-//        .antMatchers("/admin").hasRole(ADMIN.name())
+        //TODO: Stop serving app through Spring? Is it needed, since Spring can't actually control SPA's?
 //        .antMatchers("/*", "/ducks/*", "/index.html", "/static/css/**", "/static/js/**")
-
+        //We define API restrictions here.
         .antMatchers(HttpMethod.GET, "/api/items/**").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/api/items/**").hasRole(ADMIN.name())
+        .antMatchers( "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.POST, "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.PUT, "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.PATCH, "/api/items/**").hasRole(ADMIN.name())
+
         .antMatchers("/**")
         .permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-//        .defaultSuccessUrl("/admin")
-        .permitAll()
-        .and()
-        .logout()
-        .logoutUrl("/logout")
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-        .clearAuthentication(true)
-        .invalidateHttpSession(true)
-        .deleteCookies("JSESSIONID", "remember-me")
-        .logoutSuccessUrl("/");
+
+        .anyRequest().authenticated();
+
+        //We handle login from the App, and POST to /login
+//        .and()
+//
+//        .formLogin()
+//        .permitAll()
+//        .defaultSuccessUrl("/#/")
+//
+
+        //No such thing as logging out with JWTs.
+//        .logout()
+//        .logoutUrl("/logout")
+//        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+//        .clearAuthentication(true)
+//        .invalidateHttpSession(true)
+//        .deleteCookies("JSESSIONID", "remember-me")
+//        .logoutSuccessUrl("/login");
 //        .httpBasic();
   }
   @Override
