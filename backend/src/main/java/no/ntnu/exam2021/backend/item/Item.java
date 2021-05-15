@@ -1,15 +1,16 @@
 package no.ntnu.exam2021.backend.item;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import no.ntnu.exam2021.backend.itemOrderRelation.ItemOrderRelation;
+
+import java.util.Set;
 
 @Data
 @Entity
@@ -32,6 +33,10 @@ public class Item {
 
     //todo: image url?
     private String image;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "item")
+    Set<ItemOrderRelation> ItemOrderRelation;
 
 
 
