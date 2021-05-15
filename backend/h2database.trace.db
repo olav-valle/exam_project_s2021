@@ -447,3 +447,12 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:/home/mort/g
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 68 more
+2021-05-15 20:31:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ORDER[*] (ID) VALUES (NULL)"; expected "identifier"; SQL statement:
+insert into order (id) values (null) [42001-200]
+2021-05-15 20:35:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ORDER[*] (ID) VALUES (?)"; expected "identifier"; SQL statement:
+insert into order (id) values (?) [42001-200]
+2021-05-15 21:00:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ORDER[*] (CART_NAME, ID) VALUES (?, ?)"; expected "identifier"; SQL statement:
+insert into order (cart_name, id) values (?, ?) [42001-200]

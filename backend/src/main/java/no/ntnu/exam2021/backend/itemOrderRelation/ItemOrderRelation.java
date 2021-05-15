@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Table(name = "order_item_relation")
 public class ItemOrderRelation {
 
     @Id
@@ -26,8 +27,7 @@ public class ItemOrderRelation {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @JsonManagedReference
-    @ManyToOne
+    @OneToOne
     @MapsId("itemID")
     @JoinColumn(name = "item_id")
     private Item item;

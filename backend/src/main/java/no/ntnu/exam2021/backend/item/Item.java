@@ -34,10 +34,6 @@ public class Item {
     //todo: image url?
     private String image;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "item")
-    Set<ItemOrderRelation> ItemOrderRelation;
-
 
 
 
