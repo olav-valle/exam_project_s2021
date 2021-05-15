@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {useMediaQuery} from 'react-responsive'
 
 function HeaderComp() {
@@ -27,8 +27,10 @@ function HeaderComp() {
 
     const responsiveNavLinks = [
         <React.Fragment>
-            <li>
-                <Link
+            <li
+                key="/about"
+            >
+                <NavLink
                     title="Link to About Us page"
                     className="
                             focus:ring-4
@@ -36,19 +38,21 @@ function HeaderComp() {
                     to='/about'
                 >
                     About
-                </Link>
+                </NavLink>
             </li>
 
-            <li>
-                <Link
-                    title="Link to site administration panel"
+            <li
+                key="/admin"
+            >
+                <NavLink
+                    title="NavLink to site administration panel"
                     className="
                             focus:ring-4
                             focus:ring-gray-300"
                     to='/admin'
                 >
                     Admin
-                </Link>
+                </NavLink>
             </li>
         </React.Fragment>
     ];
@@ -56,7 +60,8 @@ function HeaderComp() {
     return (
         <nav className="flex justify-center items-center bg-yellow h-20 text-xl">
 
-            <img className="h-16 w-16 m-4" aria-label="logo" alt="A logo of a rubber duck silhouette" src="3135085.png"/>
+            <img className="h-16 w-16 m-4" aria-label="logo" alt="A logo of a rubber duck silhouette"
+                 src="3135085.png"/>
             <ul className="
                 nav-links
                 w-1/2
@@ -70,8 +75,10 @@ function HeaderComp() {
                 children:hover:text-blue-light
                 children:hover:border-blue-light"
             >
-                <li>
-                    <Link
+                <li
+                    key="/"
+                >
+                    <NavLink
                         title="Link to front page"
                         className="
                             focus:ring-4
@@ -79,48 +86,65 @@ function HeaderComp() {
                         to='/'
                     >
                         Home
-                    </Link>
+                    </NavLink>
                 </li>
-                <li>
-                    <Link
+
+                <li
+                    key="/cart"
+                >
+                    <NavLink
                         title="Link to shopping cart"
                         className="
                             focus:ring-4
                             focus:ring-gray-300"
                         to='/cart'
+                        key="/cart"
                     >
                         Cart
-                    </Link>
+                    </NavLink>
                 </li>
+
+                <li
+                    key='/login'
+                >
+                    <NavLink
+                        title="Login page"
+                        className="
+                            focus:ring-4
+                            focus:ring-gray-300"
+                        to='/login'
+                    >
+                        Log In
+                    </NavLink>
+                </li>
+
                 {isSmallScreen ? null :
                     responsiveNavLinks
                 }
             </ul>
 
             {isSmallScreen ?
-                <div
-
-                >
+                <div>
                     <button
-                        aria-label="Drop down navigation menu"
-                        aria-roledescription="button"
-                        aria-haspopup="menu"
+                        aria-label=" Drop down navigation menu"
+                        aria-roledescription=" button"
+                        aria-haspopup=" menu"
                         aria-expanded={menuState}
-                        className="relative"
+                        className=" relative"
                         onClick={toggleMenuOnClick}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none"
-                             viewBox="0 0 24 24"
-                             stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                    {menuState ?
-                        <ul
-                            aria-roledescription="menu"
-                            onClick={toggleMenuOnClick}
-                            className="
+                        <svg xmlns=" http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-blue-light" fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                              d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+                {menuState ?
+                    <ul
+                        aria-roledescription="menu"
+                        onClick={toggleMenuOnClick}
+                        className="
                             p-4
                             rounded
                             shadow
@@ -132,13 +156,13 @@ function HeaderComp() {
                             children:border-yellow
                             children:hover:text-blue-light
                             children:hover:border-blue-light"
-                        >
-                            {responsiveNavLinks}
-                        </ul>
-                        : null
-                    }
-                </div>
-                : null
+                    >
+                        {responsiveNavLinks}
+                    </ul>
+                    : null
+                }
+            </div>
+            : null
             }
         </nav>
     );

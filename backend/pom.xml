@@ -121,7 +121,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <version>2.4.5</version>-->
+                <!--                <version>2.4.5</version>-->
                 <configuration>
                     <executable>true</executable>
                     <excludes>
@@ -139,7 +139,7 @@
         <profile>
             <id>build-frontend</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -154,55 +154,70 @@
                             <workingDirectory>../frontend</workingDirectory>
                         </configuration>
                         <executions>
-<!--                            <execution>-->
-<!--                                <id>install node and npm</id>-->
-<!--                                <goals>-->
-<!--                                    <goal>install-node-and-npm</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <nodeVersion>v15.4.0</nodeVersion>-->
-<!--                                    <npmVersion>7.3.0</npmVersion>-->
-<!--                                </configuration>-->
-<!--                            </execution>-->
-<!--                            <execution>-->
-<!--                                <id>npm install</id>-->
-<!--                                <goals>-->
-<!--                                    <goal>npm</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <arguments>install</arguments>-->
-<!--                                </configuration>-->
-<!--                            </execution>-->
-<!--                            <execution>-->
-<!--                                <id>npm run build</id>-->
-<!--                                <goals>-->
-<!--                                    <goal>npm</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <arguments>run build</arguments>-->
-<!--                                </configuration>-->
-<!--                            </execution>-->
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>v15.4.0</nodeVersion>
+                                    <npmVersion>7.3.0</npmVersion>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>npm install</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>npm run build</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run build</arguments>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
-<!--                            <execution>-->
-<!--                                <id>copy-build-to-static</id>-->
-<!--                                <phase>process-classes</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>copy-resources</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <resources>-->
-<!--                                        <resource>-->
-<!--                                            <directory>${basedir}/../frontend/build</directory>-->
-<!--                                        </resource>-->
-<!--                                    </resources>-->
-<!--                                    <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>-->
+                            <!--                            <execution>-->
+                            <!--                                <id>copy-build-to-templates</id>-->
+                            <!--                                <phase>process-classes</phase>-->
+                            <!--                                <goals>-->
+                            <!--                                    <goal>copy-resources</goal>-->
+                            <!--                                </goals>-->
+                            <!--                                <configuration>-->
+                            <!--                                    <resources>-->
+                            <!--                                        <resource>-->
+                            <!--                                            <directory>${basedir}/../frontend/build</directory>-->
+                            <!--                                        </resource>-->
+                            <!--                                    </resources>-->
+                            <!--                                    <outputDirectory>${basedir}/src/main/resources/templates</outputDirectory>-->
+                            <!--                                </configuration>-->
+                            <!--                            </execution>-->
+                            <!--                            <execution>-->
+                            <!--                                <id>copy-build-to-static</id>-->
+                            <!--                                <phase>process-classes</phase>-->
+                            <!--                                <goals>-->
+                            <!--                                    <goal>copy-resources</goal>-->
+                            <!--                                </goals>-->
+                            <!--                                <configuration>-->
+                            <!--                                    <resources>-->
+                            <!--                                        <resource>-->
+                            <!--                                            <directory>${basedir}/../frontend/build</directory>-->
+                            <!--                                        </resource>-->
+                            <!--                                    </resources>-->
+                            <!--                                    <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>-->
 
-<!--                                </configuration>-->
-<!--                            </execution>-->
+                            <!--                                </configuration>-->
+                            <!--                            </execution>-->
                             <execution>
                                 <id>copy-build-to-target</id>
                                 <phase>process-classes</phase>
@@ -219,23 +234,7 @@
 
                                 </configuration>
                             </execution>
-<!--                            <execution>-->
-<!--                                <id>copy-build-to-templates</id>-->
-<!--                                <phase>process-classes</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>copy-resources</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <resources>-->
-<!--                                        <resource>-->
-<!--                                            <directory>${basedir}/../frontend/build</directory>-->
-<!--                                        </resource>-->
-<!--                                    </resources>-->
 
-<!--                                    <outputDirectory>${basedir}/src/main/resources/templates</outputDirectory>-->
-
-<!--                                </configuration>-->
-<!--                            </execution>-->
                         </executions>
                     </plugin>
                 </plugins>
