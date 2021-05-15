@@ -17,6 +17,9 @@ public class TokenConfig {
   private Integer tokenExpirationAfterDays;
 
   public TokenConfig() {
+    this.secretKey = "duckduckduckduckduckduckduckduckduckduckduckduckduckduckduckgoose";
+    this.tokenPrefix = "Bearer ";
+    this.tokenExpirationAfterDays = 10;
   }
   public String getSecretkey() { return secretKey; }
 
