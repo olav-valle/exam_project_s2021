@@ -26,26 +26,6 @@ function App() {
         }
     },)
 
-    useEffect(async () => {
-        if (userFetch === "idle") {
-            try {
-                let user = await fetch("/user")
-                    .then(response => response.json());
-                let isAdmin = user.authorities.some(a => a.authority === "ROLE_ADMIN");
-                setIsAdmin(isAdmin);
-            } catch (e) {
-                throw e;
-            }
-        }
-    })
-
-    const getAdmin = async () => {
-        let user = await fetch("/user")
-            .then(response => response.json());
-        let isAdmin = user.authorities.some(a => a.authority === "ROLE_ADMIN");
-        return isAdmin;
-    }
-
     return (
         <HashRouter>
             <div className="App flex flex-col h-screen justify-between">
@@ -55,7 +35,9 @@ function App() {
                         <Route path="/" exact component={ItemGrid}/>
                         <Route path="/about" component={About}/>
                         <Route path="/cart" component={CartComp}/>
-                        <Route path="/admin" component={isAdmin ? AdminPanelComp : LoginComp}/>
+                        <Route path="/login" component={LoginComp}/>
+                               //todo: conditional routing on isUserAdmin
+                        <Route path="/admin" component={AdminPanelComp}/>
                         <Route path="/shop/product/:itemId" component={itemDetails}/>
                     </Switch>
                 </main>

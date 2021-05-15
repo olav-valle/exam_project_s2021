@@ -1,11 +1,8 @@
 package no.ntnu.exam2021.backend.security.token;
 
 import com.google.common.net.HttpHeaders;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
-import org.springframework.context.annotation.Bean;
-import javax.crypto.SecretKey;
 
 
 @ConfigurationProperties(prefix = "application.security.token")
@@ -14,12 +11,12 @@ public class TokenConfig {
 
   private String secretKey;
   private String tokenPrefix;
-  private Integer tokenExpirationAfterDays;
+  private Integer tokenExpirationAfterSeconds;
 
   public TokenConfig() {
     this.secretKey = "duckduckduckduckduckduckduckduckduckduckduckduckduckduckduckgoose";
     this.tokenPrefix = "Bearer ";
-    this.tokenExpirationAfterDays = 10;
+    this.tokenExpirationAfterSeconds = 600;
   }
   public String getSecretkey() { return secretKey; }
 
@@ -35,13 +32,13 @@ public class TokenConfig {
     this.tokenPrefix = tokenPrefix;
   }
 
-  public Integer getTokenExpirationAfterDays() {
-    return tokenExpirationAfterDays;
+  public Integer getTokenExpirationAfterSeconds() {
+    return tokenExpirationAfterSeconds;
   }
 
   //todo: lower this to ~hour or minutes
-  public void setTokenExpirationAfterDays(Integer tokenExpirationAfterDays) {
-    this.tokenExpirationAfterDays = tokenExpirationAfterDays;
+  public void setTokenExpirationAfterSeconds(Integer tokenExpirationAfterDays) {
+    this.tokenExpirationAfterSeconds = tokenExpirationAfterDays;
   }
 
   public String getAuthorizationHeader() {
