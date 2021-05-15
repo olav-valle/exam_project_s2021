@@ -61,16 +61,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .addFilterAfter(new TokenVerifyer(secretKey, tokenConfig), TokenAuthenticationFilter.class)
         .authorizeRequests()
         //TODO: Stop serving app through Spring? Is it needed, since Spring can't actually control SPA's?
-//        .antMatchers("/*", "/ducks/*", "/index.html", "/static/css/**", "/static/js/**")
+
+
+        .antMatchers("/").permitAll()
         //We define API restrictions here.
         .antMatchers(HttpMethod.GET, "/api/items/**").permitAll()
         .antMatchers( "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.POST, "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.PUT, "/api/items/**").hasRole(ADMIN.name())
         .antMatchers(HttpMethod.PATCH, "/api/items/**").hasRole(ADMIN.name())
-
-        .antMatchers("/**")
-        .permitAll()
+//        .antMatchers("/*", "/ducks/*", "/index.html", "/static/css/**", "/static/js/**").permitAll()
+//        .antMatchers("/**")
 
         .anyRequest().authenticated();
 
