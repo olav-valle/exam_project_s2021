@@ -10,24 +10,32 @@ const header = new Headers( {
     'Authorization': localStorage.getItem("Token")
 });
 
+
+// Not exactly sure how useful this is...
+// It was mostly just to compare the results in POSTMAN.
+const fetchServerOptions = async () => {
+    try {
+    const options = await fetch(SERVER+"/", {
+        method: "OPTIONS",
+        headers: new Headers({
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'Authorization',
+            'Origin': 'localhost:3000'
+        })
+    });
+
+} catch (e) {}
+
+}
+
+
+// POST login credentials to server.
 const loginUser = async (user, pw) => {
 
     const credentials = {
         "username": user,
         "password": pw
     }
-
-    // try {
-    //     const options = await fetch(SERVER+"/", {
-    //         method: "OPTIONS",
-    //         headers: new Headers({
-    //             'Access-Control-Request-Method': 'POST',
-    //             'Access-Control-Request-Headers': 'Authorization',
-    //             'Origin': 'localhost:3000'
-    //         })
-    //     });
-    //
-    // } catch (e) {}
 
     try {
         const response = await fetch(SERVER + LOGIN, {
@@ -39,15 +47,10 @@ const loginUser = async (user, pw) => {
             body: JSON.stringify(credentials)
         })
 
-
         if (response.status === 200) {
             // const headers = await response.headers;
             try {
-                const auth = await response.headers.get("Authorization");
-                console.log(auth);
-                const responseBody = await response.json();
-
-                localStorage.setItem("Token", auth);
+                localStorage.setItem("Token", await response.headers.get("Authorization"));
             } catch (err) {
                 console.log(err);
                 throw err;
@@ -55,9 +58,15 @@ const loginUser = async (user, pw) => {
         }
         // return response.status;
     } catch (e) {
+        console.log(e);
         throw e;
     }
+}
 
+// Query server about which user the currently stored JWT authorizes to.
+// Can be used to test a tokens validity, as the server returns 403
+// on an invalid (or missing) token.
+const getCurrentUser = async () => {
     try {
         const user = await fetch(SERVER+"/user",
             {
@@ -166,4 +175,4 @@ const updateItem = async (existingItem) => {
 }
 
 
-export {getItems, deleteItem, postNewItem, getItemById, updateItem, loginUser}
+export {getItems, deleteItem, postNewItem, getItemById, updateItem, loginUser, getCurrentUser}
