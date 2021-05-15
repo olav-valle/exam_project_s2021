@@ -94,6 +94,8 @@ public class TokenVerifyer extends OncePerRequestFilter {
     } catch (JwtException e ) {
       throw new IllegalStateException("The token " + token + " is invalid.");
     }
+    filterChain.doFilter(request, response);
+
 
   }
 }

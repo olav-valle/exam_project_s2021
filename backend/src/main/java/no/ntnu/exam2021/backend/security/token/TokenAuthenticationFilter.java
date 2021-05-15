@@ -61,4 +61,7 @@ public class TokenAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
     response.addHeader(tokenConfig.getAuthorizationHeader(), tokenConfig.getTokenPrefix() + token);
   }
+
+  //TODO: Add a unsuccessfulAuthentication?
+  // find some way to notify frontend of failed or refused API actions.
 }
