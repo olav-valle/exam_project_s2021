@@ -40,7 +40,6 @@ function App() {
                         <Route path="/about" component={About}/>
                         <Route path="/cart" component={CartComp}/>
                         <Route path="/login" component={LoginComp}/>
-                               //todo: conditional routing on isUserAdmin
                         <Route path="/admin"> {
                                 ((currentUserRole === "ROLE_ADMIN"))
                             ?
