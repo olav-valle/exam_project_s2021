@@ -15,6 +15,13 @@ const getHeaders = () => {
     })
 };
 
+const getNoAuthHeaders = () => {
+    return new Headers({
+        'Content-Type': "application/hal+json",
+        'Accept': "application/hal+json",
+    })
+}
+
 
 // Not exactly sure how useful this is...
 // It was mostly just to compare the results in POSTMAN.
@@ -95,7 +102,7 @@ const getItems = async () => {
     try {
         const response = await fetch(URL + ITEMS, {
                 method: "GET",
-                headers: getHeaders()
+                headers: getNoAuthHeaders()
             }
         );
         if (response.ok) {
