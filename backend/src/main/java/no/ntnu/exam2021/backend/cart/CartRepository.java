@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+//TODO: Add dummy users
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
     List<Cart> findAllByUserOrderByCreatedDateDesc(User user);

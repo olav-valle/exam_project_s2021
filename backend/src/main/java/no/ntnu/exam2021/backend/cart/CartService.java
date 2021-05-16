@@ -22,6 +22,7 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
+    //TODO: Add dummy users and make this work or replace..
     public void addToCart(AddToCartDto addToCartDto, Item item, User user){
         Cart cart = new Cart(item, addToCartDto.getQuantity(), user);
         cartRepository.save(cart);

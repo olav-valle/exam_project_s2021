@@ -19,9 +19,11 @@ public class Cart {
     private Date createdDate;
 
     @ManyToOne
+    //TODO: "item_id" ?
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Item item;
 
+    //TODO: Add dummy users and pray that it works
     @JsonIgnore
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
