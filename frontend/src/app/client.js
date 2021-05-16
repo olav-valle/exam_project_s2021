@@ -4,11 +4,16 @@ const URL = SERVER + API;
 
 const ITEMS = "/items"
 
-const header = new Headers( {
-    'Content-Type': "application/hal+json",
-    'Accept': "application/hal+json",
-    'Authorization': localStorage.getItem("Token")
-});
+
+const getHeaders = () => {
+
+
+    return new Headers({
+        'Content-Type': "application/hal+json",
+        'Accept': "application/hal+json",
+        'Authorization': localStorage.getItem("Token")
+    })
+};
 
 
 // Not exactly sure how useful this is...
@@ -32,6 +37,8 @@ const fetchServerOptions = async () => {
 // POST login credentials to server.
 const loginUser = async (user, pw) => {
 
+    localStorage.setItem("Token", null);
+
     const credentials = {
         "username": user,
         "password": pw
@@ -51,12 +58,13 @@ const loginUser = async (user, pw) => {
             // const headers = await response.headers;
             try {
                 localStorage.setItem("Token", await response.headers.get("Authorization"));
+                await getCurrentUser();
             } catch (err) {
                 console.log(err);
                 throw err;
             }
         }
-        // return response.status;
+        return response.status;
     } catch (e) {
         console.log(e);
         throw e;
@@ -68,11 +76,14 @@ const loginUser = async (user, pw) => {
 // on an invalid (or missing) token.
 const getCurrentUser = async () => {
     try {
-        const user = await fetch(SERVER+"/user",
+        const response = await fetch(SERVER+"/user",
             {
-                headers: {'Authorization': localStorage.getItem("Token")}
+                headers: getHeaders()
             });
+
+        const user = await response.json()
         console.log(user);
+        return user;
 
     } catch (e) {
         console.log(e);
@@ -84,7 +95,7 @@ const getItems = async () => {
     try {
         const response = await fetch(URL + ITEMS, {
                 method: "GET",
-                headers: header
+                headers: getHeaders()
             }
         );
         if (response.ok) {
@@ -99,10 +110,10 @@ const getItems = async () => {
 // SELECT specific item by id
 const getItemById = async (itemId) => {
     try {
-        const response = await fetch(URL + `/${itemId}`,
+        const response = await fetch(URL + ITEMS + `/${itemId}`,
             {
                 method: "GET",
-                headers: header
+                headers: getHeaders()
             });
         if (response.ok) {
             return await response.json();
@@ -114,16 +125,17 @@ const getItemById = async (itemId) => {
 }
 
 // DELETE specific item by id
-const deleteItem = async (itemId) => {
+const deleteItem = async (item) => {
     try {
-        const response = await fetch(URL + `/${itemId}`,
+        const response = await fetch(
+            item._links.self.href,
             {
                 method: "DELETE",
-                headers: header
+                headers: getHeaders()
             })
         // const resp = await response;
-        if (response.status === 201) {
-            return response;
+        if (response.status === 204) {
+            return Promise.resolve();
         }
         return Promise.reject();
     } catch (err) {
@@ -139,7 +151,7 @@ const postNewItem = async (newItem) => {
             {
                 method: "POST",
                 body: JSON.stringify(newItem),
-                headers: header
+                headers: getHeaders()
             })
         if (response.status === 201) {
             return await response.json();
@@ -163,7 +175,7 @@ const updateItem = async (existingItem) => {
                     price: existingItem.price,
                     image: existingItem.image
                 }),
-                headers: header
+                headers: getHeaders()
             })
         if (response.ok) {
             return await response.json();

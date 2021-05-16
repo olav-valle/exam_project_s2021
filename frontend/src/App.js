@@ -4,13 +4,16 @@ import ItemGrid from "./features/items/ItemGridComp";
 import HeaderComp from "./features/header/HeaderComp";
 import About from "./features/pages/About";
 import itemDetails from "./features/items/ItemDetailComp";
-import {BrowserRouter as Router, HashRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Footer from "./features/header/Footer";
 import CartComp from "./features/cart/CartComp";
 import AdminPanelComp from "./features/Admin/AdminPanelComp";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchItemProgressStatus, fetchItems} from "./features/items/itemsSlice";
 import LoginComp from "./features/users/LoginComp";
+import {getCurrentUser} from "./app/client";
+import {getUserRole, isUserTokenValid} from "./features/users/userSlice";
+import {current} from "@reduxjs/toolkit";
 
 function App() {
 
@@ -19,6 +22,7 @@ function App() {
     const dispatch = useDispatch();
 
     const fetchStatus = useSelector(fetchItemProgressStatus);
+    const currentUserRole = useSelector(getUserRole);
 
     useEffect(() => {
         if (fetchStatus === 'idle') {
@@ -37,7 +41,13 @@ function App() {
                         <Route path="/cart" component={CartComp}/>
                         <Route path="/login" component={LoginComp}/>
                                //todo: conditional routing on isUserAdmin
-                        <Route path="/admin" component={AdminPanelComp}/>
+                        <Route path="/admin"> {
+                                ((currentUserRole === "ROLE_ADMIN"))
+                            ?
+                            <AdminPanelComp/> : <Redirect to="/login"/>
+                        }
+
+                        </Route>
                         <Route path="/shop/product/:itemId" component={itemDetails}/>
                     </Switch>
                 </main>
