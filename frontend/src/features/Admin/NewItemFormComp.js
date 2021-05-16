@@ -97,7 +97,7 @@ const NewItemFormComp = ({itemId}) => {
 
     // Delete item button
     const onDeleteClick = () => {
-        dispatch(itemDeleted(item.id));
+        dispatch(itemDeleted(item));
     }
 
 // boolean describing whether all fields in form have valid values,

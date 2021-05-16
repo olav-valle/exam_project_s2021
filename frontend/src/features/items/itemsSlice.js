@@ -25,8 +25,8 @@ export const addItem = createAsyncThunk(
 
 export const itemDeleted = createAsyncThunk(
     'items/itemDeleted',
-    async (itemId) => {
-        return await deleteItem(itemId);
+    async (item) => {
+        return await deleteItem(item);
     }
 )
 
@@ -84,7 +84,7 @@ const itemsSlice = createSlice({
         },
         [itemDeleted.fulfilled]: (state, action) => {
             state.deleteItemStatus = 'fulfilled';
-            state.ducks = state.ducks.filter(item => item.id !== action.meta.arg)
+            state.ducks = state.ducks.filter(item => item.id !== action.meta.arg.id)
 
         },
         [itemDeleted.rejected]: (state, action) => {
