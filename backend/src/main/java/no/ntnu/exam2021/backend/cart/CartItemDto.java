@@ -3,6 +3,8 @@ package no.ntnu.exam2021.backend.cart;
 import javax.validation.constraints.NotNull;
 import no.ntnu.exam2021.backend.item.Item;
 
+//Code based upon work from: https://github.com/webtutsplus/ecommerce-backend but modified to suit our needs.
+
 public class CartItemDto {
     private Integer id;
     private @NotNull Integer userId;

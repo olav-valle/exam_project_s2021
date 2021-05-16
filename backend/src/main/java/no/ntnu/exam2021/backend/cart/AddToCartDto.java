@@ -1,5 +1,7 @@
 package no.ntnu.exam2021.backend.cart;
 
+//Code based upon work from: https://github.com/webtutsplus/ecommerce-backend but modified to suit our needs.
+
 import javax.validation.constraints.NotNull;
 
 public class AddToCartDto {

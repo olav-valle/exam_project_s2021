@@ -7,7 +7,7 @@ import no.ntnu.exam2021.backend.item.Item;
 import javax.persistence.*;
 import java.util.Date;
 import javax.validation.constraints.NotBlank;
-
+//Code based upon work from: https://github.com/webtutsplus/ecommerce-backend but modified to suit our needs.
 @Entity
 @Table(name="cart")
 public class Cart {
@@ -24,7 +24,7 @@ public class Cart {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Item item;
 
-    //TODO: Add dummy users and pray that it works
+
     @JsonIgnore
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")

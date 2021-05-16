@@ -1,14 +1,17 @@
 package no.ntnu.exam2021.backend.cart;
 
+//Code based upon work from: https://github.com/webtutsplus/ecommerce-backend but modified to suit our needs.
+
 import no.ntnu.exam2021.backend.User.User;
 import no.ntnu.exam2021.backend.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+
 
 @Service
 @Transactional
@@ -23,7 +26,7 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
-    //TODO: Add dummy users and make this work or replace..
+
     public void addToCart(AddToCartDto addToCartDto, Item item, User user){
         Cart cart = new Cart(item, addToCartDto.getQuantity(), user);
         cartRepository.save(cart);

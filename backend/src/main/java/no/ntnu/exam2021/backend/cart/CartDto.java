@@ -1,5 +1,7 @@
 package no.ntnu.exam2021.backend.cart;
 import java.util.List;
+//Code based upon work from: https://github.com/webtutsplus/ecommerce-backend but modified to suit our needs.
+
 
 public class CartDto {
     private List<CartItemDto> cartItems;
