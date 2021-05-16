@@ -1,5 +1,6 @@
 package no.ntnu.exam2021.backend.cart;
 
+import no.ntnu.exam2021.backend.User.User;
 import no.ntnu.exam2021.backend.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class CartService {
         }
         double totalCost = 0;
         for (CartItemDto cartItemDto :cartItems){
-            totalCost += (cartItemDto.getItem().getPrice()* cartItemDto.getQuantity());
+            //totalCost += (cartItemDto.getItem().getPrice()* cartItemDto.getQuantity());
         }
         CartDto cartDto = new CartDto(cartItems,totalCost);
         return cartDto;

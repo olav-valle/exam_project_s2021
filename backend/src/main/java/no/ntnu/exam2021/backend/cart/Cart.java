@@ -1,6 +1,7 @@
 package no.ntnu.exam2021.backend.cart;
 
 import net.minidev.json.annotate.JsonIgnore;
+import no.ntnu.exam2021.backend.User.User;
 import no.ntnu.exam2021.backend.item.Item;
 
 import javax.persistence.*;
@@ -34,7 +35,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Item, item, int quantity, User, user) {
+    public Cart(Item item, int quantity, User user) {
         this.user = user;
         this.item = item;
         this.quantity = quantity;

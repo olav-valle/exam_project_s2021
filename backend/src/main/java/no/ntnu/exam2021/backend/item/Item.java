@@ -5,12 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import no.ntnu.exam2021.backend.itemOrderRelation.ItemOrderRelation;
-
-import java.util.Set;
 
 @Data
 @Entity
@@ -49,6 +45,10 @@ public class Item {
         this.price = price;
         this.description = description;
         this.image = image;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Long getId() {

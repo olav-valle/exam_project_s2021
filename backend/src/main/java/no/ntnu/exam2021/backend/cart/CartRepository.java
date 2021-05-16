@@ -1,5 +1,6 @@
 package no.ntnu.exam2021.backend.cart;
 
+import no.ntnu.exam2021.backend.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

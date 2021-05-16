@@ -3,6 +3,7 @@ package no.ntnu.exam2021.backend.itemOrderRelation;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import no.ntnu.exam2021.backend.cart.Cart;
 import no.ntnu.exam2021.backend.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +26,7 @@ public class ItemOrderRelation {
     @ManyToOne
     @MapsId("orderID")
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Cart order;
 
     @OneToOne
     @MapsId("itemID")
@@ -44,7 +45,7 @@ public class ItemOrderRelation {
      * @param amount this item amount
      */
     public ItemOrderRelation(
-            Order order,
+            Cart order,
             Item item,
             int amount
     ){
