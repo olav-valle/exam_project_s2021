@@ -29,5 +29,7 @@ public class User {
             fetch = FetchType.LAZY)
     private List<Cart> orders;
 
-
+    public User(String name) {
+        this.name = name;
+    }
 }

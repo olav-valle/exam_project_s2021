@@ -3,7 +3,7 @@ package no.ntnu.exam2021.backend.cart;
 import javax.validation.constraints.NotNull;
 
 public class AddToCartDto {
-    private Integer id;
+    private Long id;
     private @NotNull Integer itemId;
     private @NotNull Integer quantity;
 
@@ -18,11 +18,11 @@ public class AddToCartDto {
                 ", quantity=" + quantity +
                 ",";
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

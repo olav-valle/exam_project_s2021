@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class ItemOrderRelation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name ="item_amount")
@@ -24,12 +24,11 @@ public class ItemOrderRelation {
 
     @JsonManagedReference
     @ManyToOne
-    @MapsId("orderID")
-    @JoinColumn(name = "order_id")
-    private Cart order;
+    @MapsId("cartId")
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
-    @OneToOne
-    @MapsId("itemID")
+    @OneToOne(targetEntity = Item.class)
     @JoinColumn(name = "item_id")
     private Item item;
 
@@ -40,16 +39,16 @@ public class ItemOrderRelation {
     /**
      * Order-Item relation
      *
-     * @param order order
+     * @param cart order
      * @param item item
      * @param amount this item amount
      */
     public ItemOrderRelation(
-            Cart order,
+            Cart cart,
             Item item,
             int amount
     ){
-        this.order = order;
+        this.cart = cart;
         this.item = item;
         this.amount = amount;
     }

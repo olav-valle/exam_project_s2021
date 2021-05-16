@@ -36,15 +36,15 @@ public class ItemOrderRelationService {
     }
 
     /**
-     * Save and order-Itme relation to the database
+     * Save an order-item relation to the database
      * @param cart the ordre to save
      * @param item the item to save
      * @param itemAmount the amount of that item
      */
     public void addItemToOrder(
             Cart cart,
-            @NotNull Item item,
-            @NotNull int itemAmount
+            Item item,
+            int itemAmount
     ){
 
         ItemOrderRelation relation = new ItemOrderRelation(cart, item, itemAmount);
@@ -60,7 +60,7 @@ public class ItemOrderRelationService {
      * @param itemId the Id of the item (needs to exist in the db)
      * @param itemAmount the amount of that item to add.
      */
-    public void addItemToOrder(Integer cartId, Long itemId, int itemAmount){
+    public void addItemToOrder(Long cartId, Long itemId, int itemAmount){
         //todo: change from Integer to Long ^There
 
         Optional<Cart> orderOptional = cartRepository.findById(cartId);

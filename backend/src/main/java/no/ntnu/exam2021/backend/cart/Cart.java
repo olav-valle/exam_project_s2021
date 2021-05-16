@@ -1,20 +1,25 @@
 package no.ntnu.exam2021.backend.cart;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 import no.ntnu.exam2021.backend.User.User;
 import no.ntnu.exam2021.backend.item.Item;
+import no.ntnu.exam2021.backend.itemOrderRelation.ItemOrderRelation;
 
 import javax.persistence.*;
 import java.util.Date;
-import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name="cart")
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "created_date")
     private Date createdDate;
@@ -28,6 +33,9 @@ public class Cart {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "cart")
+    private Set<ItemOrderRelation> relations;
+
     private int quantity;
 
     public Cart() {
@@ -39,11 +47,11 @@ public class Cart {
         this.quantity = quantity;
         this.createdDate = new Date();
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

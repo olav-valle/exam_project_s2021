@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import no.ntnu.exam2021.backend.item.Item;
 
 public class CartItemDto {
-    private Integer id;
+    private Long id;
     private @NotNull Integer userId;
     private @NotNull Integer quantity;
     private @NotNull Item item;
@@ -29,11 +29,11 @@ public class CartItemDto {
                 '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
