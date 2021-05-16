@@ -17,6 +17,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -41,14 +42,26 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userService = userService;
         this.secretKey = secretKey;
         this.tokenConfig = tokenConfig;
+
+
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/v2/api-docs", "/swagger-resources/**", "/configuration/ui", "/configuration/security", "/swagger-ui.html");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                // We need CORS to expose headers required by the frontend.
                 .cors()
                 .and()
+                // We don't need csrf, because we don't server
                 .csrf()
                 .disable()
 //                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -68,6 +81,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new TokenVerifyer(secretKey, tokenConfig), TokenAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/").permitAll()
                 //We define API restrictions here.
                 .antMatchers(HttpMethod.GET, "/api/items/**").permitAll()
@@ -78,7 +92,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //        .antMatchers("/*", "/ducks/*", "/index.html", "/static/css/**", "/static/js/**").permitAll()
 //        .antMatchers("/**")
 
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .headers()
+                .contentTypeOptions().disable();
 
         //We handle login from the App, and POST to /login
 //        .and()
