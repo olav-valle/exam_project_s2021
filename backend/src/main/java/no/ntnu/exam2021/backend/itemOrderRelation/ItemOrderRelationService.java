@@ -1,5 +1,7 @@
 package no.ntnu.exam2021.backend.itemOrderRelation;
 
+import no.ntnu.exam2021.backend.cart.Cart;
+import no.ntnu.exam2021.backend.cart.CartRepository;
 import no.ntnu.exam2021.backend.item.Item;
 import no.ntnu.exam2021.backend.item.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -13,39 +15,39 @@ import java.util.Optional;
 public class ItemOrderRelationService {
 
     private ItemRepository itemRepository;
-    private OrderRepository orderRepository;
+    private CartRepository cartRepository;
     private final ItemOrderRelationRepository itemOrderRelationRepository;
 
     /**
      * Todo: add Java doc
      * @param itemRepository
-     * @param orderRepository
+     * @param cartRepository
      * @param itemOrderRelationRepository
      */
     public ItemOrderRelationService(
             ItemRepository itemRepository,
-            OrderRepository orderRepository,
+            CartRepository cartRepository,
             ItemOrderRelationRepository itemOrderRelationRepository
     ){
         this.itemRepository = itemRepository;
-        this.orderRepository = orderRepository;
+        this.cartRepository = cartRepository;
         this.itemOrderRelationRepository = itemOrderRelationRepository;
 
     }
 
     /**
      * Save and order-Itme relation to the database
-     * @param order the ordre to save
+     * @param cart the ordre to save
      * @param item the item to save
      * @param itemAmount the amount of that item
      */
     public void addItemToOrder(
-            @NotNull Order order,
+            Cart cart,
             @NotNull Item item,
             @NotNull int itemAmount
     ){
 
-        ItemOrderRelation relation = new ItemOrderRelation(order, item, itemAmount);
+        ItemOrderRelation relation = new ItemOrderRelation(cart, item, itemAmount);
         itemOrderRelationRepository.save(relation);
     }
 
@@ -54,21 +56,23 @@ public class ItemOrderRelationService {
      * it the item or order does not exist in the database,
      * and IllegalArgumentException wil be thrown
      *
-     * @param orderId the ID of the order (needs to exist in the db)
+     * @param cartId the ID of the order/cart (needs to exist in the db)
      * @param itemId the Id of the item (needs to exist in the db)
      * @param itemAmount the amount of that item to add.
      */
-    public void addItemToOrder(Long orderId, Long itemId, int itemAmount){
-        Optional<Order> orderOptional = orderRepository.findById(orderId);
+    public void addItemToOrder(Integer cartId, Long itemId, int itemAmount){
+        //todo: change from Integer to Long ^There
+
+        Optional<Cart> orderOptional = cartRepository.findById(cartId);
         Optional<Item> itemOptional = itemRepository.findById(itemId);
 
-        if (orderOptional.isEmpty()) throw new IllegalArgumentException("Cant find order with ID: " + orderId);
+        if (orderOptional.isEmpty()) throw new IllegalArgumentException("Cant find order with ID: " + cartId);
         if (itemOptional.isEmpty()) throw new IllegalArgumentException("Cant find item with ID: " + itemId);
 
-        Order order = orderOptional.get();
+        Cart cart = orderOptional.get();
         Item item = itemOptional.get();
 
-        this.addItemToOrder(order,item,itemAmount);
+        this.addItemToOrder(cart,item,itemAmount);
     }
 
 }
